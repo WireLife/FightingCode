@@ -1,0 +1,21 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+int n, cn = 1;
+void fun(int num)
+{
+	for (int i=1; i <= num/ 2; i++)
+	{
+		cn++;
+		fun(i);
+	}
+}
+int main()
+{
+	int num,sum=0;
+	cin >> num;
+	fun(num);
+	cout << cn<<endl;
+	system("pause");
+	return 0;
+}
