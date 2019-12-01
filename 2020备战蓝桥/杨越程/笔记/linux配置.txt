@@ -1,0 +1,26 @@
+sudo 以root身份运行
+su	切换用户
+	su root 切换到root
+apt	ubuntu的包管理器
+		包就是程序
+	改了源
+	sudo apt update
+	更新源
+	sudo apt upgrade
+	更新程序
+
+sudo apt install git
+	安装git
+	vim wget curl nano
+vim nano atom linux下的文本编辑器
+cd 进入目录
+pwd 查看当前目录
+mkdir 创建文件夹
+touch 创建文件
+./文件	运行这个文件
+rm	删除文件
+	tar
+	unzip
+ls 查看当前目录下的文件
+	隐藏文件 -a
+	列表查看 -l
