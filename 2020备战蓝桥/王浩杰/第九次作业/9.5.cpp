@@ -25,17 +25,22 @@ int f(int m,int n,int max,int max1)
 }
 int main()
 {
-	int m,n,sum=0, a,max1,i;
-	cin >> m >> n;
-	a = m % n;
-	if (a == 0)max1 = m / n;
-	else max1 = m / n + 1;
-	for (i = m; i >= max1; i--)
+	int m,n, a,max1,i,K;
+	cin >> K;
+	for (; K > 0; K--)
 	{
-		if(m-i<=max1)sum = sum + f(m - i, n-1,m-i , max1);
-		else sum = sum + 1 + (m - a * max1) / max1;
+		int sum = 0;
+		cin >> m >> n;
+		a = m % n;
+		if (a == 0)max1 = m / n;
+		else max1 = m / n + 1;
+		for (i = m; i >= max1; i--)
+		{
+			if (m - i <= max1)sum = sum + f(m - i, n - 1, m - i, max1);
+			else sum = sum + 1 + (m - a * max1) / max1;
+		}
+		cout << sum<<endl;
 	}
-	cout << sum;
 	system("pause");
 	return 0;
 }
