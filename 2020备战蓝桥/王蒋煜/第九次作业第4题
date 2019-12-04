@@ -9,12 +9,16 @@ int f(int n)
 }
 int main()
 {
-    int k,n,i,j;
+    int k,n,i,j,c[100];
     scanf("%d",&n);
     for(j=1;j<=n;j++)
     {
 	  scanf("%d",&k);
-	  printf ("%d",f(k));
+	  c[j]=f(k);
+    }
+    for(j=1;j<=n;j++)
+    {
+    	printf("%d\n",c[j]);
     }
     return 0;
 }
