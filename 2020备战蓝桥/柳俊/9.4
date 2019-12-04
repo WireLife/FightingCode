@@ -10,8 +10,11 @@ int Pell(int n)
 }
 int main()
 {
-    int k;
-    scanf("%d",&k);
-    printf("%d",Pell(k));
+    int k[100]={0},I,i;
+    scanf("%d",&I);
+    for(i=0;i<I;i++)
+        scanf("%d",&k[i]);
+    for(i=0;i<I;i++)
+        printf("%d\n",Pell(k[i]));
     return 0;
 }
