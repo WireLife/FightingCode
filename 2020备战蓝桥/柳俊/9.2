@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<string.h>
+void change(char* p,int length)
+{
+	int i;
+	for(i=0;i<length;i++){
+		switch(*p){
+			case 1: *p='1';break;
+			case 2: *p='2';break;
+			case 3: *p='3';break;
+			case 4: *p='4';break;
+			case 5: *p='5';break;
+			case 6: *p='6';break;
+			case 7: *p='7';break;
+			case 8: *p='8';break;
+			case 9: *p='9';break;
+			case 10:*p='A';break;
+			case 11:*p='B';break;
+			case 12:*p='C';break;
+			case 13:*p='D';break;
+			case 14:*p='E';break;
+			case 15:*p='F';break;
+		}
+		p++;
+	}
+}
+int pow2(int n)
+{
+	int i,sum=1;
+	for(i=0;i<n;i++)
+		sum*=2;
+	return sum;
+}
+int main()
+{
+	char a[1000]={},c[1000]={0},b[250]={0};
+	int i,j,sum,length,m=0,num;
+	gets(c);
+	length=strlen(c); 
+	num=strlen(c)%4;
+	if(num==0)
+	    strcpy(a,c);
+	else if(num==3){
+		a[0]='0';
+	    strcat(a,c);
+		length++;
+	}
+	else if(num==2){
+		a[0]=a[1]='0';
+		strcat(a,c);
+		length+=2;
+	}
+	else if(num==1){
+		a[0]=a[1]=a[2]='0';
+		strcat(a,c);
+		length+=3;
+	}
+	for(i=0;i<length;i++)
+	    if(a[i]=='0')
+	        a[i]=0;
+	    else if(a[i]=='1')
+	        a[i]=1;
+	for(i=0;i<length/4;i++){
+		sum=0;
+	    for(j=0;j<4;j++){
+	        sum+=pow2(3-j)*a[i*4+j];
+		}
+		b[i]=sum;
+	}
+	change(b,length/4);
+	for(i=0;i<length;i++)
+	    printf("%c",b[i]);
+	return 0;
+}
