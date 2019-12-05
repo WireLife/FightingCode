@@ -1,0 +1,27 @@
+#include<stdio.h>
+int a[20],sum;
+int f(int m,int n)
+{
+    if(m<=1)
+        return 1;
+    if(n<=1)
+        return 1;
+    if(m<n)
+        return f(m,m);
+    return f(m-n,n)+f(m,n-1);
+}
+int main()
+{
+    int T,i,m,n,k,S;
+    scanf("%d",&T);
+    S=T;
+    i=0;
+    while(T--){
+        scanf("%d%d",&m,&n);
+        a[i]=f(m,n);
+        i++;
+    }
+    for(i=0;i<S;i++)
+        printf("%d\n",a[i]);
+    return 0;
+}
