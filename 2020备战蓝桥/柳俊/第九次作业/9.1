@@ -1,0 +1,23 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+char a[100];
+double f()
+{
+    scanf("%s",&a);
+    if(strlen(a)==1&&!(a[0]>='0'&&a[0]<='9')){
+        switch(a[0]){
+            case '+': return f()+f();break;
+            case '-': return f()-f();break;
+            case '*': return f()*f();break;
+            case '/': return f()/f();break;
+        }
+    }
+    else
+        return atof(a);
+}
+int main()
+{
+    printf("%lf",f());
+    return 0;
+}

@@ -1,0 +1,20 @@
+#include<stdio.h>
+int Pell(int n)
+{
+    if(n==1)
+        return 1;
+    else if(n==2)
+        return 2;
+    else
+        return Pell(n-1)+Pell(n-2);
+}
+int main()
+{
+    int k[100]={0},I,i;
+    scanf("%d",&I);
+    for(i=0;i<I;i++)
+        scanf("%d",&k[i]);
+    for(i=0;i<I;i++)
+        printf("%d\n",Pell(k[i]));
+    return 0;
+}
