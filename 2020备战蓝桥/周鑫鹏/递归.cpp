@@ -3,11 +3,10 @@
 #include"1.h"
 int main()
 {
-	int*a;int max,b,c;a=(int*)malloc(max*sizeof(int));
+	float t=0;float*a;int max,m,n;a=(float*)malloc(max*sizeof(float));
 	printf("测试数据组数");scanf("%d",&max);
-	for(int i=0;i<max;i++)
-	scanf("%d",&a[i]);
-	for(int j=0;j<i;j++)
-	{c=a[j];b=Pell(c);printf("%d\n",b);}
+	for(int i=0;i<2;i++)
+	{scanf("%d/%d",&m,&n);a[i]=m/n;t=t+a[i];}
+	printf("%d",t);
 	return 0;
 }
