@@ -1,0 +1,25 @@
+#include<stdio.h>
+int a[1000],i;
+void f(int k)
+{
+    if(k<=100000){
+        a[i]=k;
+        i++;
+        f(2*k+1);
+        f(3*k+1);
+    }
+}
+int main()
+{
+    int k,x,p=0;
+    scanf("%d,%d",&k,&x);
+    for(i=0;i<1000;i++)
+        if(i==x){
+            printf("YES");
+            p=1;
+            break;
+        }
+    if(p==0)
+        printf("NO");
+    return 0;
+}
