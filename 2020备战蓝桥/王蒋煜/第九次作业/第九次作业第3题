@@ -1,0 +1,21 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+int cnt=0;
+void dfs(int n)
+{
+  int i;
+  cnt++;
+  for (i=1; i<=n/2; i++)
+   {
+     dfs(i);
+   }
+} 
+int main()
+{
+  int n;
+  cin>>n;
+  dfs(n);
+  cout<<cnt;
+  return 0;
+}
