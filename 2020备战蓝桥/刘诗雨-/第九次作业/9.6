@@ -1,0 +1,124 @@
+#include<iostream>
+using namespace std;
+int Min(int m, int n)
+{
+	int a, b;
+	a = m;
+	b = n;
+	while (m != n) {
+		if (m > n)
+			m = m - n;
+		else
+			n = n - m;
+	}
+	return m;
+
+}
+int Max(int m, int n)
+{
+	int a, b;
+	a = m;
+	b = n;
+	while (m != n) {
+		if (m > n)
+			m = m - n;
+		else
+			n = n - m;
+	}
+	return ((a*b) / m);
+}
+void Find(int x, int y)
+{
+	int min = Min(x, y);
+	if (min == 1)
+	{
+		x = x;
+		y = y;
+	}
+	else if (y / min == 1)
+	{
+		x = x / min;
+		y = y;
+	}
+	else
+	{
+		x = x / min;
+		y = y / min;
+	}
+}
+void Sum(int n,int arr1[],int im)
+{
+	int x,y,a,b,c,d;
+	a = arr1[im];
+	b = arr1[im + 1];
+	c = arr1[im + 2];
+	d = arr1[im + 3];
+	if (n>=1)
+	{
+		if (b == 1)
+		{
+			if (d == 1)
+			{
+					x = a + c;
+					y = 1;
+			}
+			else
+			{
+				x = a * d + c;
+				y = d;
+				Find(x, y);
+			}
+		}
+		else if (b != 1)
+		{
+			if (b == d)
+			{
+				x = a + c;
+				y = d;
+				Find(x, y);
+			}
+			else
+			{
+				x = a * (Max(b, d) / b) + c * (Max(b, d) / d);
+				y = Max(b, d);
+				Find(x, y);
+			}
+		}
+		arr1[im+2] = x;
+		arr1[im+3] = y;
+	}Sum(n - 1, arr1, im + 2);
+}
+void main()
+{
+	int n,i,j=0,m=0,im=0;
+	cin >> n;
+	char *arr = new char[n*3];
+	for (int i = 0; i < n * 3; i++)
+	{
+		cin >>arr[i];
+	}
+	for (i = 0; i <= n * 3; i++)
+	{
+		if (arr[i] == '/')
+			m++;
+	}
+	int *arr1 = new int[n*3-m];
+	for (i = 0; i <= n * 3; i++)
+	{
+		if (arr[i] != '/')
+		{
+			arr1[j] = arr[i] - '0';
+			j++;
+		}
+	}
+	Sum(n, arr1, im);
+	if (arr1[n] != 1)
+	{
+		cout << arr1[n - 1] << '/' << arr1[n] << endl;
+	}
+	else
+	{
+		cout << arr1[n - 1] << endl;
+	}
+	system("pause");
+}
