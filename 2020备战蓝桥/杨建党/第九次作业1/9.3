@@ -1,0 +1,26 @@
+#include<iostream> 
+#include<cstdio> 
+using namespace std; 
+int a=0; 
+void acm(int n) 
+{ 
+
+   int i; 
+
+    a++; 
+     for (i=1; i<=n/2; i++) 
+
+	 { 
+
+      acm(i); 
+	 } 
+}  
+int main() 
+{ 
+
+   int n; 
+   cin>>n; 
+   acm(n); 
+   cout<<a; 
+   return 0; 
+}
