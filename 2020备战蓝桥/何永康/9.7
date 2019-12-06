@@ -1,0 +1,37 @@
+#include <iostream>
+using namespace std;
+int k,m,A=0;
+int T(int k,int m)
+{
+    if(k>m)
+    {
+        A=0;
+        return 0;
+    }
+    if(k==m)
+    {
+        A=1;
+        return 0;
+    }
+    T(2*k+1,m);
+    T(3*k+1,m);
+
+    return 0;
+}
+int main()
+{
+    int a;
+    cin>>k,m;
+    if(k>m)
+    {
+        a=m;
+        m=k;
+        k=a;
+    }
+    T(k,m);
+    if(A=1) cout<<"Yes";
+    else cout<<"No";
+
+    cout<<endl;
+    return 0;
+}
