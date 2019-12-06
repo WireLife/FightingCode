@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int  Pell(int n)
+{
+    if(n==1)
+        return 1;
+    else if (n==2)
+        return 2;
+    else
+        return (2*Pell(n-1)+Pell(n-2));
+
+    return 0;
+}
+
+int main()
+{
+    int n,S;
+    scanf("%d",&n);
+    Pell(n);
+    S=Pell(n);
+    printf("%d\n",S);
+    return 0;
+}
