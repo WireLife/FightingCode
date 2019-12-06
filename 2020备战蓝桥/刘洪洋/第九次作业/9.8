@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int MAXN = 35;
+const int INF = 1000000000;
+int n, m, a[MAXN*MAXN];
+double sum;
+int main()
+{
+    int CASE = 1;
+    while (~scanf("%d%d", &n, &m) && (n+m))
+    {
+        n = n*m;
+        for (int i = 0; i < n; i++) scanf("%d", &a[i]);
+        scanf("%lf", &sum); sum /= 100.0;
+        sort(a, a + n);
+        a[n] = INF;
+        int i = 1;
+        for (i = 1; i <= n; i++)
+        {
+            sum += a[i-1];   
+            if (sum/i <= a[i]) break;
+        }
+        printf("Region %d\n", CASE++);
+        printf("%.2f meters.\n", sum/i);
+        printf("%.2f percent of the region is under water.\n\n", i*100.0/n);
+    }
+    return 0;
+}
