@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+int m = 0;
+void S(int n)
+{
+    int c;
+	int i;
+	m++;
+	for (i = n / 2; i >= 1; i--)
+	{
+	    if(n==6)
+            cout<<i<<n<<endl;
+        else
+            cout<<i<<n<<"6"<<endl;
+
+
+		S(i);
+	}
+
+}
+
+int main()
+{
+	int n;
+	cin >> n;
+	cout<<endl;
+	S(n);
+	cout <<m;
+	cout << endl;
+	return 0;
+
+}
