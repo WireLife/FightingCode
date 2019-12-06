@@ -1,0 +1,107 @@
+#include <iostream>
+#include<stack>
+#include<string>
+#include<iterator>
+using namespace std;
+
+bool isdigit(const char a)
+{
+	bool temp = false;
+	switch (a)
+	{
+	case '0':
+	case '1':
+	case '2':
+	case '3':
+	case '4':
+	case '5':
+	case '6':
+	case '7':
+	case '8':
+	case '9':
+		temp = true;
+		break;
+	default:
+		break;
+	}
+	return temp;
+}
+
+bool issymble(char a)
+{
+	bool temp = false;
+	switch (a)
+	{
+	case '+':
+	case '-':
+	case '*':
+	case '/':
+		temp = true;
+		break;
+	default:
+		break;
+	}
+	return temp;
+}
+
+float Calculate(const string &inputstring)
+{
+	
+	string temp;
+	stack<float> numstack,result;
+	temp = inputstring;
+	string::iterator i = temp.begin();
+	for (; i != temp.end(); --i)
+	{
+		if (isdigit(*i))
+		{
+			numstack.push(*i);
+		}
+		else
+		{
+			
+			float result;
+			if (sizeof(numstack)!= 0)
+			{
+				float m = numstack.top();
+				numstack.pop();
+				float n = numstack.top();
+				numstack.pop();
+				if (*i == '+')
+				{
+					result = n + m;
+				}
+				if (*i == '-')
+				{
+					result = n - m;
+				}
+				if (*i == '*')
+				{
+					result = n * m;
+				}
+				if (*i == '/')
+				{
+					result = n / m;
+				}
+				
+			}
+			numstack.push(result);
+		}
+	}
+	while (sizeof(numstack) == 1)
+	{
+		result.pop();
+		break;
+	}
+	return 0;
+}
+
+int main()
+{
+	string str;
+	cout<<"请输入逆波兰表达式：" << endl; 
+	cin >> str;
+	Calculate(str);
+	system("pause");
+	return 0;
+}
