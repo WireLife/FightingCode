@@ -1,0 +1,23 @@
+#include<stdio.h>
+//#include<string>
+char s1[101], s2[101], s3[] = { '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L' };
+void ptoq(int p, int q) {
+	int i, j, num = 0, len;
+	strupr(s1);   //小写变大写
+	len = strlen(s1);
+	for (i = 0; i < len; i++) {
+		num = num * p + (s1[i] <= '9' ? s1[i] - '0' + 0 : s1[i] - 'A' + 10);
+	}   //乘基数累加
+	i = 0;
+	while (num != 0) {
+		s2[i] = s3[num % q]; //除基数取余数
+		num = num / q;
+		i++;
+	}
+	for (j = i - 1; j >= 0; j--) printf("%c", s2[j]);  //倒着输出
+}
+void main() {
+	int p=2, q=16;
+	scanf("%s",s1);
+	ptoq(2, 16);
+}
