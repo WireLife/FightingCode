@@ -1,0 +1,68 @@
+#include<iostream>
+#include<string> 
+using namespace std;
+void turnz(char*a);
+void turny(char*a);
+void turnx(char*a);
+int main()
+{
+    int count = 0;
+    char a1[7];
+    char a2[7];
+    cout << "输入第一个骰子六个面的值：";
+        cin >> a1;
+    cout << "输入第二个骰子六个面的值：";
+        cin >> a2;
+    if (strcmp(a1, a2) == 0)
+        count++;
+    for (int j = 0; j < 4; j++)
+    {
+        turnz(a2);
+        if (strcmp(a1, a2)==0)
+            count++;
+        for (int x = 0; x < 4; x++)
+        {
+            turny(a2);
+            if (strcmp(a1, a2)==0)
+                count++;
+            for (int y = 0; y < 4; y++)
+            {
+                turnx(a2);
+                if (strcmp(a1, a2)==0)
+                    count++;
+            }
+        }
+    }
+    if (count>0)
+        cout << "两个骰子相等" << endl;
+    else
+        cout << "两个骰子不相等" << endl;
+    return 0;
+}
+
+void turnz(char*a)
+{
+    char temp = a[0];
+    a[0] = a[1];
+    a[1] = a[5];
+    a[5] = a[4];
+    a[4] = temp;
+}
+
+void turny(char*a)
+{
+    char temp = a[1];
+    a[1] = a[2];
+    a[2] = a[4];
+    a[4] = a[3];
+    a[3] = temp;
+}
+
+void turnx(char*a)
+{
+    char temp = a[0];
+    a[0] = a[2];
+    a[2] = a[5];
+    a[5] = a[3];
+    a[3] = temp;
+}
