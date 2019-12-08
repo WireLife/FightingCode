@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <string.h>
+
+void convert(char *input, char *output)
+{
+	int len1 = strlen(input); 
+	int pos = len1 / 4 + 1; 
+	if (len1 % 4 == 0)
+	{
+		pos = pos - 1;
+	}
+	int j = 0;
+	while (len1>0)
+	{
+		char sum = 0;
+		for (int i=0; i<4 && len1>0; i++, len1--) 
+		{
+			sum = sum + (input[len1-1]-'0')*pow(2, i);
+		}
+		sum = sum + '0';
+		if ('9'<sum && sum<'9'+7)
+		{
+			sum = sum + 7;
+		}
+		else if (sum > '9' + 6)
+		{
+			printf("您输入的不是正确的2进制数!\n");
+			exit(0);
+		}
+		output[--pos] = sum;
+	}
+}
+
+int main()
+{
+	int groupNum = 0;
+	char total[1024] = {0};
+	scanf("%d", &groupNum);
+	for (int i=1; i<=groupNum; i++)
+	{
+		char input[1024] = {0};
+		char output[256] = {0};
+		fflush(stdin); 
+		gets(input);
+		convert(input, output);
+
+		char format[32] = {0};
+		sprintf(format, "\nCase %d: ", i);
+		strcat(total, format);
+		strcat(total, output);
+	}
+
+	printf("%s\n", total);
+}

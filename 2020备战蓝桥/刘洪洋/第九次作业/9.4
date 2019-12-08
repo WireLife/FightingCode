@@ -1,0 +1,24 @@
+#include <iostream>
+#include <cstdio>
+#define  k 32767
+#define Max 1000000
+using namespace std;
+int a[Max+5];
+int f(int x)
+{
+	if(a[x]!=0) return a[x];
+	if(x==1) return 1;
+	if(x==2) return 2;
+	return a[x]=(2*(f(x-1))%k+(f(x-2))%k)%k;
+}
+int main()
+{
+	int n,a;
+	cin>>n;
+	for(int i=1;i<=n;i++)
+	{
+		cin>>a;	
+		cout<<f(a)<<endl;
+	}
+	return 0;
+}

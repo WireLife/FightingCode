@@ -1,0 +1,23 @@
+#include<iostream>
+
+using namespace std;
+double nibolan()
+{
+    char n[100];
+    cin >> n;
+    switch (n[0])
+    {
+    case'+': return nibolan() + nibolan();
+    case'-': return nibolan() - nibolan();
+    case'*': return nibolan() * nibolan();
+    case'/': return nibolan() / nibolan();
+    default: return atof(n);
+        break;
+    }
+}
+int main()
+{
+    cout << nibolan();
+    cout << endl;
+    return 0;
+}
