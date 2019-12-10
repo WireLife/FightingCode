@@ -11,7 +11,7 @@ int f(int i)
 	if (i == 3)return 1;
 	for (a = 2; a < i / 2; a++)
 	{
-		if ((i / a) == 0)return 0;
+		if ((i % a) == 0)return 0;
 	}
 	return 1;
 }
