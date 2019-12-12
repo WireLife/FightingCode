@@ -1,0 +1,27 @@
+#include<stdio.h>
+int a[27];
+int main()
+{
+int i,n,j=1;
+a[1]=1; 
+printf("The original order of cards is:(r:rad b:block):\n");
+for(i=2;i<=26;i++)
+{
+n=1;
+do{ 
+if(j>26) j=1; 
+if(a[j]) j++; 
+else{
+if(n==3) a[j]=i;
+j++; n++; 
+}
+}while(n<=3);
+}
+for(i=1;i<=26;i++)
+{
+printf("%c",a[i]>13? 'r':'b');
+printf("%d ",a[i]>13? a[i]-13:a[i]);
+if(i==13) printf("\n");
+}
+printf("\n");
+}
