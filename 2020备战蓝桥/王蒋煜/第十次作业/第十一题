@@ -1,0 +1,100 @@
+
+#include <iostream>
+using namespace std;
+ 
+bool pan1(int tt);
+bool pan2(int tt);
+bool pan3(int tt);
+bool panSu(int tt);
+int a[4] = {2,3,5,7};
+ 
+int main(void)
+{
+    int i,j,k,m,n;
+	int sum,tem,t1,t2;
+	for (i=0;i!=4;++i)
+	  for (j=0;j!=4;++j)
+	   for(k=0;k!=4;++k)
+	   {
+		   tem = a[i]*100+a[j]*10+a[k];
+			   for(m=0;m!=4;++m)
+			   {
+				   t1 = tem*a[m];
+                   if (t1>=1000&&pan1(t1))
+                   {
+                     for (n=0;n!=4;++n)
+                     {
+						 t2 = tem*a[n];
+						 if(t2>=1000&&pan2(t2))
+						 {
+							 sum = t1+ t2*10;
+							 if(sum>=10000&&pan3(sum))
+							 {
+                                 cout<<" "<<a[i]<<a[j]<<a[k]<<endl;
+								 cout<<"*"<<" "<<a[n]<<a[m]<<endl;
+                                 cout<<"_____________"<<endl;
+								 cout<<" "<<t1<<endl;
+								 cout<<t2<<endl;
+								 cout<<"_____________"<<endl;
+								 cout<<sum<<endl;
+							 }
+						 }
+                     }
+                   }
+			   }
+	   }
+	  
+	
+	return 0;
+}
+ 
+bool panSu(int tt)
+{
+    for (int i=0;i!=4;++i)
+	{
+		if(tt == a[i])
+			return true;
+	}
+	return false;
+}
+ 
+bool pan1(int tt)
+{
+	int t;
+	while (tt!=0)
+	{
+	t = tt%10;
+	if(!panSu(t))
+		return false;
+	tt /= 10;
+	}
+	return true;
+}
+ 
+bool pan2(int tt)
+{
+   int t;
+   while (tt!=0)
+   {
+   t = tt%10;
+   if(!panSu(t))
+	   return false;
+   tt /= 10;
+   }
+   
+   return true;
+}
+ 
+bool pan3(int tt)
+{
+	int t;
+	while(tt!=0)
+	{
+	    t = tt%10;
+	 if(!panSu(t))
+	  return false;
+	tt /= 10;	
+	}
+		return true;
+
+}
