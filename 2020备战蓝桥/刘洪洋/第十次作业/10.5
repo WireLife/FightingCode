@@ -1,0 +1,52 @@
+#include<stdio.h>
+int count_Days(int y,int m,int d);
+int main()
+{
+    int s,year,month,day;
+    scanf("%4d-%2d-%2d",&year,&month,&day);
+    if(year<1990)
+    {
+        printf("Invalid input\n");
+    }
+    else if(month>12||month<0)
+    {
+        printf("Invalid input\n");
+    }
+    else if(day>31||day<0)
+    {
+        printf("Invalid input\n");
+    }
+    else{
+    s=count_Days(year,month,day);
+    switch(s)
+    {
+        case 1:printf( "他在打鱼\n");break;
+        case 2:printf("他在晒网\n");break;
+            default:break;
+    }
+    return 0;
+    }
+}
+int count_Days(int y,int m,int d)
+{
+    int d1=0,d2=0,d3=0,year,sum=0,i;
+    int a[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+    if((y%4==0&&y%100!=0)||y%400==0)
+    {
+        a[2]=29;
+        year=366;
+    }
+    else
+        year=365;
+    d1=(y-1990)*year;
+    for(i=1;i<m;i++)
+    {
+        d2+=a[i];
+    }
+    d3=d;
+    sum=d1+d2+d3;
+    if(sum%5<=3||sum%5>1)
+        return 1;
+    else
+        return 0;
+}
