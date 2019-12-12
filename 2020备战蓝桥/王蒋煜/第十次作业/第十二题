@@ -1,0 +1,34 @@
+
+#include <iostream>
+using namespace std;
+ 
+int main(void)
+{
+   int i,j,k,m;
+   int n;
+   int sum;
+   int sh;
+ 
+   for (i=1;i!=10;++i)
+	   for(j=0;j!=10;++j)
+		   for(k=0;k!=10;++k)
+			   for(m=0;m!=10;++m)
+			   {
+				   sum = i*10000+j*1000+4*100+k*10+m;
+				   for(n=10;n!=100;++n)
+				   {
+					   if(sum%n == 0)
+					   {
+						    sh = sum/n;
+						  if (n*(sh/100)%100 == 77 && (sh/10%10 == 7) && (sh%10 != 0))//根据算式中数字判断
+						  {
+							  if (n*7/10%10 == 7)
+							  {
+								 cout<<sum<<"/"<<n<<"="<<sh<<endl;
+							  }
+						  }
+					   }
+				   }
+			   }
+   return 0;
+}
