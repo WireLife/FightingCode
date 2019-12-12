@@ -1,0 +1,111 @@
+#include<cstdio>
+#include<cctype>
+#include<cstring>
+#include<cstdlib>
+#include<ctime>
+#define maxn 50
+#define max_len 10
+using namespace std;
+ 
+int x[max_len],p[maxn+20],q[maxn+20];
+char a[maxn+20],b[maxn+20];
+int mod;
+ 
+int power(int i,int j)
+{
+  int ans=1;
+  while(j>0)
+    {
+      if(j&1)ans*=i,ans%=mod;
+      i*=i,i%=mod,j>>=1;
+    }
+  return ans;  
+}
+ 
+void work()
+{
+  switch(p[p[0]])
+    {
+      case 1:q[q[0]-1]+=q[q[0]];
+             q[q[0]-1]%=mod; 
+             break;
+	  case 2:q[q[0]-1]-=q[q[0]];
+	         q[q[0]-1]%=mod;
+	         break;
+	  case 3:q[q[0]-1]*=q[q[0]];
+	         q[q[0]-1]%=mod;
+	         break;
+	  case 4:q[q[0]-1]=power(q[q[0]-1],q[q[0]]);
+	         break; 
+	  case 5:p[0]--;
+	         return; 
+	  case 6:p[0]--;
+	         return;       
+    }
+  p[0]--,q[0]--;  
+}
+ 
+int get(char s[],int x)
+{
+  int i,j,k,len=strlen(s);
+  p[0]=0,q[0]=1,q[1]=0;//比如：- a 
+  for(i=0;i<len;i++)
+    {
+      if(s[i]==' ')continue;
+      if(s[i]=='a')
+	    {
+		  q[++q[0]]=x;
+		  continue;
+	    }
+	  if(isdigit(s[i]))
+	    {
+	      q[++q[0]]=s[i]-'0';
+	      while(isdigit(s[i+1]))
+	        q[q[0]]=q[q[0]]*10+s[++i]-'0',q[q[0]]%=mod;
+	      continue;  
+	    }  
+      switch(s[i])
+        {
+          case '(':p[++p[0]]=5;
+		           break;
+          case '+':while(p[0]>0 && p[p[0]]>0 && p[p[0]]<5)work();
+                   p[++p[0]]=1;  
+		           break;
+          case '-':while(p[0]>0 && p[p[0]]>0 && p[p[0]]<5)work();
+                   p[++p[0]]=2; 
+		           break;
+          case '*':while(p[0]>0 && p[p[0]]>2 && p[p[0]]<5)work();
+                   p[++p[0]]=3;
+		           break;
+          case '^':while(p[0]>0 && p[p[0]]>3 && p[p[0]]<5)work();
+                   p[++p[0]]=4;
+		           break;
+          case ')':while(p[0]>0 && p[p[0]]<5)work();
+                   if(p[p[0]]==5)p[0]--;
+				   break;  
+        }
+    }
+  while(p[0])work();
+  if(q[0]==1)return (q[1]+mod)%mod;
+  return (q[2]+mod)%mod;  
+}
+ 
+int main()
+{
+  srand(time(0));
+  mod=rand()%10000+100;
+  
+  int i,j,k,n;
+  gets(a);
+  for(i=1;i<max_len;i++)
+    x[i]=get(a,i);
+  scanf("%d\n",&n);
+  for(i=0;i<n;i++)
+    {
+      gets(b);
+      for(j=1;j<max_len;j++)
+        if(get(b,j)!=x[j])break;
+      if(j>=max_len)printf("%c",'A'+i);  
+    }
+  return 0;
+}
