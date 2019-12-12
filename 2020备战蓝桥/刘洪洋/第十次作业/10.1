@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+ 
+int main()
+{
+    int s[9], i, sum = 0, j;
+    char b;
+    scanf("%1d-%1d%1d%1d%1d-%1d%1d%1d%1d", &s[0], &s[1], &s[2], &s[3], &s[4], &s[5], &s[6], &s[7], &s[8], &s[9]);
+    scanf("-%1d", &b);
+    for (i = 0; i < 9; i++)
+    {
+        sum = sum + s[i] * (i + 1);
+    }
+    j = sum % 11;
+    if (j == 10)
+    {
+        if (b == 'X')
+            printf("1");
+        else
+        {
+            printf("0");
+        }
+    }
+    else
+    {
+        if (b == j )
+            printf("1");
+        else
+        {
+            printf("0");
+        }
+    }
+    return 0;
+}
