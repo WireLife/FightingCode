@@ -1,0 +1,94 @@
+#include <stdio.h>
+ 
+#define NUM 5              
+#define C_NUM 4  
+          
+int a[NUM+1];              
+         
+int b[]={0, 2, 3, 5, 7};        
+int f(long sum); 
+ 
+int main() 
+{ 
+    int i, not_finish = 1; 
+    i = 2;                
+    a[1] = 1;            
+    while(not_finish)     
+    { 
+        while(not_finish&&i<=NUM) 
+        
+            if(a[i] >= C_NUM)  
+			{				
+                if(i == 1 && a[1] == C_NUM) 
+				{
+                    not_finish = 0;     
+				}					
+                else 
+				{
+					a[i--] = 0;  
+				}					
+			}				
+            else 
+			{
+				a[i++]++;     
+			}		
+			
+        if(not_finish) 
+        {
+            long int sum1, sum2, sum3, sum4;         
+            sum1 = b[a[1]] * 100 + b[a[2]] * 10 + b[a[3]];   
+                             
+            sum2 = sum1 * b[a[5]];      
+            sum3 = sum1 * b[a[4]];  
+			
+            if(sum2 >= 2222 && sum2 <= 7777 && f(sum2) && sum3 >= 2222 && sum3 <= 7777 && f(sum3)) 
+                                             
+            if((sum4 = sum2 + sum3 * 10) >= 22222 && sum4 <= 77777 && f(sum4)) 
+                         
+            { 
+                printf("          %d\n", sum1);                      
+                printf("*          %d%d\n", b[a[4]], b[a[5]]); 
+                printf("........................\n"); 
+                printf("         %d\n", sum2); 
+                printf("        %d\n", sum3); 
+                printf("........................\n"); 
+                printf("        %d\n", sum4); 
+            } 
+			
+        i = NUM;                      
+        } 
+    } 
+	
+	return 0;
+} 
+int f(long sum)           
+{ 
+    int i, k, flag;  
+	
+    while(sum > 0)             
+    { 
+        i = sum % 10;   
+		
+        for (flag = 0,k = 1;!flag && k <= C_NUM; k++) 
+		{
+			
+            if(b[k] == i)
+            { 
+                flag = 1;
+				break; 
+            } 
+		}
+		
+        if(!flag) 
+		{
+			return 0; 
+		}
+		
+        else 
+		{
+			sum = sum / 10; 
+		}
+    } 
+	
+    return 1; 
+} 
