@@ -1,0 +1,46 @@
+
+#include<stdio.h>
+int judgeLeapYear(int year)
+{
+	if((!(year%4)&&(year%100))||!(year%400))
+		return 1;
+	else
+		return 0;
+}
+void daysHandle(int year,int month,int day,int *days)
+{
+	int num[]={31,28,31,30,31,30,31,31,30,31,30,31}; 
+	int beginYear,beginMonth;
+	if(judgeLeapYear(year))
+		num[1]++;
+	for(beginYear=1990;beginYear<year;beginYear++)
+	{ 
+		if(judgeLeapYear(beginYear))
+			*days+=366;
+		else
+			*days+=365;
+	} 
+	for(beginMonth=0;beginMonth<(month-1);beginMonth++) 
+	{ 
+		*days+=num[beginMonth];
+	}
+	*days+=day;
+}
+void judge(int days)
+{
+	int temp=days%5;
+	printf("在距离1990年的第%d天该人是在：",days); 
+	if(temp==4||temp==0)
+		printf("晒网\n");
+	else
+		printf("打鱼\n");
+}
+int main()
+{
+	int year,month,day,days=0;
+	puts("请输入年月日(中间以空格隔开)：");
+	scanf("%d%d%d",&year,&month,&day);
+	daysHandle(year,month,day,&days);
+	judge(days); 
+	return 0;
+} 
