@@ -1,0 +1,75 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+const int MAX = 100;
+int n = 8, flag, arr[MAX];
+
+void printa()
+{
+    for (int i = 0; i < n; i++) cout << map[i] << " ";
+    cout << endl;
+}
+
+int check()
+{
+    //printa();
+    int s[6] = { 0 };
+    s[0] = map[0] + map[1] + map[2] + map[3];
+    s[1] = map[4] + map[5] + map[6] + map[7];
+    s[2] = map[0] + map[1] + map[4] + map[5];
+    s[3] = map[2] + map[3] + map[6] + map[7];
+    s[4] = map[0] + map[3] + map[4] + map[7];
+    s[5] = map[1] + map[2] + map[5] + map[6];
+
+    for (int i = 1; i < 6; i++)
+    {
+        if (s[i - 1] != s[i]) return 0;
+    }
+
+    //cout << "sum:" << s[0] << endl;
+    return 1;
+}
+
+
+void DFS(int pos)
+{
+    //cout << "pos:" << pos << endl;
+    if (flag) return;
+    if (pos >= n)
+    {
+        if (check()) { flag = 1;}
+        return;
+    }
+
+
+    for (int i = 0; i < n; i++)
+    {
+        if (!vis[i])
+        {
+            vis[i] = 1;
+            map[i] = arr[pos];
+            DFS(pos+1);
+
+            vis[i] = 0;
+            map[i] = 0;
+        }
+    }
+
+}
+
+int main()
+{
+    for (int i = 0; i < n; i++) cin >> arr[i];
+
+    flag = 0;
+    memset(vis, 0, sizeof(vis));
+    memset(map, 0, sizeof(map));
+
+    DFS(0);
+
+    if (flag) cout << "YES" << endl;
+    else cout << "NO" << endl;
+
+    return 0;
+}
