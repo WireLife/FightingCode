@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<math.h>
+int sushu(int n)
+{
+	int j;
+	if(n==1)
+		return 0; 
+	if(n==2)
+		return 1;
+	for(j=3;j<=sqrt(n);j++)
+		if(n%j==0) return 0;
+		return 1;
+}
+int main()
+{
+	int k=0,i,j,num=0,sum=0;
+	int a[500];
+	for(i=3;i<=1993;i=i+2)
+		if(sushu(i)) 
+		{
+			a[num++]=i;
+		// num++;
+		}	
+	/*	for(i=1;i<num;i++)
+		{
+			for(j=i;i<num;j++)
+			{
+				sum+=a[j]-a[j-1];
+			}
+			if(sum==1898)
+				k++;
+		}
+		printf("%d",k);*/
+ for(num--;a[num]>1898;num--)
+ {
+	 for(i=0;a[num]-a[i]>1898;i++)
+		 if(a[num]-a[i]==1898)
+		 {
+			 printf("%d   %d",a[i],a[num]);
+			   k++;
+		 }
+		// printf("%d",k);
+ }
+		return 0;
+}
+
+
