@@ -1,0 +1,22 @@
+#include<stdio.h>
+int n;
+float a,b;
+float f(int i)
+{
+     a/=2;
+     if(i<n)
+     {
+      b+=a*3/2;
+       return f(++i);
+       }
+    else
+     return b+=a;
+     }
+  int main()
+  {
+   scanf("%f%d",&a,&n);
+    h*=2;
+    sum=f(1);
+    printf("%.2f %.2f",b,a);
+    return 0;
+ }
