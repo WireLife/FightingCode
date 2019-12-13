@@ -1,0 +1,16 @@
+#include<stdio.h>
+int main()
+{
+	double sum=0.0,m=0.0,h;
+	int n,i;
+	scanf("%d%lf",&n,&h);
+	m=h/2;
+	for(i=2;i<=n;i++)
+	{
+	    sum=h+2*m;
+		m=m/2;
+	}
+	printf("共经过%.2lf米",sum);
+    printf("反弹%.2lf米", m);
+	return 0;
+}
