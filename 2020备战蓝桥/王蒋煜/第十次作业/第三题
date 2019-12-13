@@ -1,0 +1,45 @@
+#include <iostream>
+#include <stdlib.h>
+using namespace std;
+int a=0;
+char c[10][10]={" "," ","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+int total[10]={0,0,3,3,3,3,3,4,3,4};
+/*
+number[];传入数字数组
+b[];对应字幕下标
+index;索引第index个字母
+n；号码位数
+*/
+void rank(int number[],int b[],int index,int n)
+{
+    if(index==n)
+    {
+	 
+	  for(int i=0;i<n;i++)
+	  {
+		a++;
+		printf("%c",c[number[i]][b[i]]);
+		if(a%n==0)
+		    printf("\n");
+	  }
+	 
+	  return ;
+    }
+    for (b[index] = 0;b[index]<total[number[index]];b[index]++)
+	  rank(number,b,index+1,n);
+}
+
+int main()
+{
+    int number[11];
+    int n,i;
+    int b[11]={0};	//数字代表的字符的位置
+    printf("请输入电话号码的长度:\n");
+    scanf("%d",&n);	//输入电话号码位数
+    printf("请输入一个电话号码:\n");
+    for (i=0;i<n;i++)
+	  scanf("%d",&number[i]);
+    rank(number,b,0,n);
+    printf("共有%d组\n",a/n);
+    return 0;
+}
