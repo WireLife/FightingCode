@@ -1,0 +1,17 @@
+#include <stdio.h>
+int main()
+{
+	int i,j,k,m;
+	for(i=2;i!=6;i++)
+		for(j=2;j!=6;j++)
+			for( k=2;k!=6;k++)
+				for(m=2;m!=6;m++) 
+					if(i!=j&&i!=k&&j!=k&&i!=m&&j!=m&&k!=m&&
+						i<j&&k<m&&i<m)
+	               {
+						printf("1,%d,%d\n",i,j);
+                        printf("%d,%d,6\n",k,m);
+	               }
+				
+	return 0;
+}

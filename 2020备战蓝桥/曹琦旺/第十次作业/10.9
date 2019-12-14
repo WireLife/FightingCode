@@ -1,0 +1,41 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+void fillblank()
+{
+	int i = 0, j = 0, n = 0,m=0, x=0;
+	int a[2][3];
+	for(i=0;i<2;i++)
+		for (j = 0; j < 3; j++)
+	a[i][j] = (rand() % (6 - 1 + 1)) + 1;
+	for (j = 0; j < 3; j++)//比较完上下三组
+	{
+		if (a[0][j] < a[1][j])
+		{
+			n++;
+			if (n == 3)
+			{
+				for (i = 0; i < 2; i++)//左右两组进行比较
+				{
+					if (a[i][0] < a[i][1] && a[i][1] < a[i][2])
+						m++;
+				}
+				if (m == 2)
+					x++;
+			}
+		}
+	}
+	cout << x << endl;
+}
+	
+	
+
+
+int main()
+{
+	fillblank();
+	system("pause");
+	return 0;
+}
+

@@ -1,8 +1,8 @@
-//局限性太大。
+
 #include<iostream>
-#include<cstring>
+#include<string>
 #include<sstream>//isstringstream
-#include<cstdio>
+#include<stdio.h>
 using namespace std;
 
 int main()

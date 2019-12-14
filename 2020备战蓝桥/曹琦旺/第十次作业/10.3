@@ -1,0 +1,47 @@
+#include<iostream>
+using namespace std;
+
+char Link(char * a)
+{
+	int i, j,n;
+	char b[5];
+	for (j = 0; j < 5; j++)
+	{
+		switch (a[i])
+		{
+		case 0:
+		case 1:  b[j] = NULL;  break;
+		case 2: {b[j] = { 'A','B','C' }; }  break;
+		case 3: {b[j] = { 'D','E','F' }; }  break;
+		case 4: {b[j] = { 'G','H','I' }; }  break;
+		case 5: {b[j] = { 'J','K','L' }; }  break;
+		case 6: {b[j] = { 'M','N','O' }; }  break;
+		case 7: {b[j] = { 'P','Q','R','S' }; } break;
+		case 8: {b[j] = { 'T','U','V' }; }  break;
+		case 9: {b[j] = { 'W','X','Y','Z' }; } break;
+		}
+	}
+	for (i = 0; i < sizeof(a[i]); i++)
+	{
+		for (j = 0;j<sizeof(b[j]); j++)
+		{
+			cout << a[i] << b[j] << endl;
+			n++;
+		}
+	}
+	return n;
+}
+
+int main()
+{
+	char *a;
+	int i;
+	cout << "请输入3-11位长的的电话号码：" << endl;
+	for (i = 0; i < 10; i++)
+	{
+		cin >> a[i];
+	}
+	Link(a);
+	system("pause");
+	return 0;
+}

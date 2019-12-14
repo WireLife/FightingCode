@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<string.h>
+char c[10][10]={"","","ABC","DEF","GHI","JKL","MNO","PQRS","TUV","WXYZ"};  
+int total[10]={0,0,3,3,3,3,3,4,3,4}; 
+ char a[20];
+ char b[20];
+void ZH(int k,int len)
+{
+	int i;
+  if(k==len){ 
+		b[len]='\0';  
+	    printf("%s\n",b);
+		return ;
+	}
+	for(i=0;i<total[a[k]];i++){ 
+	b[k]=c[a[k]][i];
+		ZH(k+1,len);
+	}	
+	 
+}
+int main()
+{
+	int len,i,number[20];	
+	int sum=1;
+  scanf("%s",a);
+  len=strlen(a);
+  number[len];
+	for(i=0;i<len;i++){
+		 a[i]-='0'; 
+		sum*=total[a[i]];
+	}
+	ZH(0,len);
+	printf("%d\n",sum);
+	return 0;
+}
+ 

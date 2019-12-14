@@ -1,0 +1,33 @@
+#include <stdio.h>
+int main( )
+{
+	int i,n,j=1;
+	int a[27]={0};
+	a[1]=1; 
+	for(i=2;i<27;i++)
+	{
+	  n=1;
+	do
+	{
+		if(j>26) 
+	    	j=1;
+			if(a[j]) 
+			j++;	
+		else
+		{
+		 if(3==n)
+		 a[j]=i;
+		 j++; 
+		 n++;
+		}
+	}while(n<=3); 
+	}
+	for(i=1;i<27;i++) 
+	{
+		if(a[i]>13)
+		printf("%c%d",'r',a[i]-13);
+		else
+		printf("%c%d",'b',a[i]);
+	}
+	return 0;
+}
