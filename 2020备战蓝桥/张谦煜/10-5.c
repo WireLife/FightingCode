@@ -7,11 +7,25 @@ typedef struct
     int day;
 }Date;
 
+int isSpecialYear(const Date* date)
+{
+    if((date->year%100==0&&date->year%400==0)||(date->year%100!=0&&date->year%4==0))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+    
+}
+
 void AddDay(Date* date,int add)
 {
-    if(date->day+add>mouthlen[date->mouth])
+    int addition = isSpecialYear(date)&&date->mouth==2?1:0;
+    if(date->day+add>mouthlen[date->mouth]+addition)
     {
-        date->day=add-(mouthlen[date->mouth]-date->day);
+        date->day=add-(mouthlen[date->mouth]+addition-date->day);
         AddMouth(date);
     }
     else
