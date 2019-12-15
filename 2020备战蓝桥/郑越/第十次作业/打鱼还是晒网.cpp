@@ -8,9 +8,6 @@
 
 #include <stdio.h>
 #include <string.h>
-//int leapYear(int year){
-//    return ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)?1:0;
-//}
 
 int dayFrom(char Date[],int year,int month,int day){
     int month_day[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
