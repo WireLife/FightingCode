@@ -7,7 +7,6 @@
 //
 
 #include <stdio.h>
-#include <string>
 
 int check_Code(char s[]){
     int i,j=1,code,sum=0;
@@ -20,24 +19,13 @@ int check_Code(char s[]){
         }
     }
     if(sum%11==10)
-        code='X';
+        code='X'-'0';
     else
         code=sum%11;
-    if(code!='X')
-    {
-        if(code==s[12]-'0')
-            return 1;
-        else
-            return 0;
-    }
+    if(code==s[12]-'0')
+        return 1;
     else
-    {
-        if(s[12]=='X')
-            return 1;
-        else
-            return 0;
-    }
-            
+        return 0;
 }
 int main()
 {
