@@ -1,0 +1,49 @@
+#include<iostream>
+#include<string>
+#include<stack>
+using namespace std;
+
+string Findchar (string str)
+{
+	stack<char> chars;
+	stack<int> tags;
+	int tag=0,i=0;
+	while(str[i] != '\n')
+	{
+		if (str[i])
+		{
+			chars.push(str[i]);
+			tags.push(1);
+		}
+		else
+		{
+			chars.pop();
+			tags.pop();
+			if (tag == 1)
+			{
+				tags.push(2);
+			}
+		}
+	}
+    if(tag == 2)
+	{
+		char a[100];
+		int j = 0;
+		a[j] = chars.top();
+		chars.pop;
+		j++;
+		cout << a[j - 2];
+	}
+
+	return 0;
+}
+
+int main()
+{
+	string s;
+	cout << "请输入一个字符串：" << endl;
+	getline(cin,s);
+	Findchar(s);
+	system("pause");
+	return 0;
+}
