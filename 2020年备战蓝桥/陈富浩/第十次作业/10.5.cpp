@@ -18,7 +18,7 @@ int main()
 	printf("输入以后某一天的年月日：\n");
 	scanf("%d%d%d",&d2.year,&d2.month,&d2.day);
 	n=DateToNum(d2)-DateToNum(d1);
-	if(n%5<=3)
+	if(n%5<3)
 		printf("今天打鱼\n");
 	else
 		printf("今天晒网\n");
