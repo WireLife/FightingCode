@@ -1,0 +1,27 @@
+#include<iostream>
+#include<cstring>
+using namespace std; 
+int main() {
+	int a1=0,b1=0,c1=0,d1=0,e1=0;
+	std::string s="asd 123AA";
+	for(int i=0;i<s.size();i++)
+	{
+
+		if(s[i]>='a'&&s[i]<='z')
+		b1++;
+		else if(s[i]>='A'&&s[i]<='Z')
+		c1++;
+		else if(s[i]>='0'&&s[i]<='9')
+		d1++;
+		else if(s[i]=' ')
+		a1++;
+		else
+		e1++;
+	}
+	cout<<"空格数目："<<a1<<endl;
+	cout<<"小写字母个数："<<b1<<endl;
+	cout<<"大写字母个数："<<c1<<endl;
+	cout<<"数字个数："<<d1<<endl;
+	cout<<"其他："<<e1<<endl;
+	return 0;
+}
