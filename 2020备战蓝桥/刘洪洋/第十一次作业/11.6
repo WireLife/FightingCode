@@ -1,0 +1,18 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int main(){
+	double k,m,n;
+	int sum=0,len,i,j=0;
+	cin>>n;
+	string a;
+	cin>>a;
+	string b;
+	cin>>b;
+	len=sizeof(a);
+	for(i=0;a[i]!='\0';i++){
+		if(a[i]==b[i])	 sum++; }
+	m=(double)sum/len;
+	if(m>=n)  cout<<"yes";
+	else cout<<"no";
+}
