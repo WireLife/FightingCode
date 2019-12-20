@@ -1,0 +1,39 @@
+#include<cstdio>
+#include<iostream>
+using namespace std;
+int main()
+{
+    char a[100000];
+	int i,j,flag;
+	cin >> a ;
+	for (i = 0 ;a[i];i++)
+	{
+		if (a[i]  >= 97 && a[i] <=122)
+		{
+			flag = 1;
+			for (j = i+1; a[j];j++)
+			{
+				if (a[j] ==a[i]	)
+				{
+					a[j] = 'A';
+					if (flag)
+					{
+						flag =0;#立flag表示是否重复出现
+					}
+				}
+			}
+			if (flag)
+			{
+               cout << a[i];
+			   break;
+			}
+		}
+	}
+	if (a[i] == 0)#善于使用字符串结束标志符
+	{
+		cout << "no";
+	} 
+	
+	return 0;
+}
+
