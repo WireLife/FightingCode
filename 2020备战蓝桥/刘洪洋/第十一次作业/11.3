@@ -1,0 +1,15 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int main(){
+	string str;
+	int i=0;
+	while (1){
+    string str;
+	getline(cin,str);
+	   if (str[i]=='\n') break;
+	   i++;
+	}
+	str[i]='\0';
+	cout<<"s="<<str; 
+}
