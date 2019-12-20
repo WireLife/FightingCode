@@ -1,0 +1,22 @@
+#include<iostream>
+#include<string>
+using namespace std;
+int main(){    
+int letters[26]= {0};    
+int len;    
+int sum=0;    
+int i;     
+string ch;
+cin>>ch;   
+len=sizeof(ch);     
+for(i=0; i<len; i++)         
+letters[ch[i]-'a']++;     
+for(i=0; i<len; i++)     
+{        
+     if(letters[ch[i]-'a']==1)        
+{            cout<<ch[i]<<endl;            
+             return 0;        
+}    
+}    
+cout<<"no"<<endl;    
+return 0;}
