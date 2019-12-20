@@ -1,0 +1,32 @@
+/*#include<iostream>
+#include<string>
+using namespace std;
+string s;
+int large, shortspell, vacancy, number, other;
+
+void Sort()
+{
+	for (int i = 0;s[i]!='\0'; i++)
+	{
+		if (s[i] >= 'A'&&s[i] <= 'Z')
+			large++;
+		else if (s[i] >= 'a'&&s[i] <= 'z')
+			shortspell++;
+		else if (s[i] == ' ')
+			vacancy++;
+		else if (s[i] >= '0'&&s[i] <= '9')
+			number++;
+		else
+			other++;
+   }
+
+}
+int main()
+{
+	cout << "input a string and '#' to the end:" << endl;
+	getline(cin, s);
+	Sort();
+	cout << "数字共有:" << number << endl;
+	system("pause");
+	return 0;
+}
