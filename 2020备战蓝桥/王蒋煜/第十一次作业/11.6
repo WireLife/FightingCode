@@ -1,0 +1,26 @@
+#include<iostream>
+#include<string>
+using namespace std;
+void main()
+{
+	double k,m;
+	int sum=0,len,i,j=0;
+	string str;
+	string str1;
+
+	scanf("%lf",&k);
+	getchar();
+	getline(cin,str);
+	getline(cin,str1);
+	len=str.size();
+
+	for(i=0;str[i]!='\0';i++)
+		if(str[i]==str1[i])
+		    sum++;
+	m=(double)sum/len;
+
+	if(m>=k)  
+	    printf("yes");
+	else 
+	    printf("no");
+}
