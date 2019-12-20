@@ -1,0 +1,38 @@
+
+#include<stdio.h>
+#include<string.h>
+
+char s[100];
+
+void GetString()
+{
+int i=0;
+char c;
+do
+{
+c=getchar();
+s[i]=c;
+i++;
+}
+while(c!='\n');
+}
+
+void PutString()
+{
+int i=0;
+char c;
+while(s[i]!='\0')
+{
+putchar(c);
+c=s[i];
+i++;
+}
+}
+
+int main()
+{
+GetString();
+PutString();
+system("pause");
+return 0;
+} 
