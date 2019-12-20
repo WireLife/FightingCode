@@ -1,0 +1,123 @@
+makefile
+	1. 建立makefile文件，把编译指令写到makefile文件中
+		make  make clean
+	2. 基本写法
+		目的:依赖
+			依赖  --->  目的
+	3.变量的使用
+		
+		OBJ = list
+
+		CC:=gcc
+
+		Target+=main.o 
+
+	4. 预定义的变量
+		^   依赖文件
+		@		目标文件
+		<		第一个依赖文件
+
+		通配符   
+			%     任意个任意字符
+
+	5. makefile的函数
+
+
+
+shell脚本
+	1. *.sh
+	2. 加上可执行权限就可以直接执行
+	3. 脚本中可以直接调用shell 命令
+	4. 语法
+		4.1 变量
+		4.2 输入 输出
+			read echo
+		4.3 运算
+			expr m + n
+			((m + n))
+			[]
+			反引号`会优先执行
+
+		4.4 if  
+			if(){}
+
+			if test 
+			then
+				....
+			fi
+
+			if test 
+			then
+				....
+			else
+				....
+			fi
+
+			if 
+			then
+				....
+			elif 
+			then
+				....
+			else
+				....
+			fi
+
+			switch(){
+			case :
+				break;
+			default:
+				break;
+			}
+
+			case ... in ...
+			) ;;
+			esac
+
+		4.5 循环
+			for .... in ....
+			do
+
+			done
+
+			for((i=0;i<5;i++))
+			do
+
+			done
+
+			while 
+			do
+
+			done
+
+
+		4.6 函数
+			函数定义
+			function 函数名(){
+
+				return ;
+			}
+
+			函数调用  函数名 参数1 参数2 参数3
+
+			使用函数参数：
+				$0 $1 $2 $3 $4  ${11}
+
+			$#  参数个数 
+			$*  $@  字符串形式存储所有参数
+ 
+			$? 函数的返回值
+
+
+
+
+
+
+
+
+
+
+
+
+
+
