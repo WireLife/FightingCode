@@ -1,0 +1,17 @@
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int i = 0;
+	char c, a[100];
+	do
+	{
+		c = getchar();
+		a[i] = c;
+		i++;
+	} while (c != '\n');
+	a[i] = '\0';
+	puts(a);
+	return 0;
+}
