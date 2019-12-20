@@ -1,0 +1,29 @@
+    #include<iostream>
+    #include<cstring>
+    using namespace std;
+    int main()
+    {
+    	char s[150];
+    	char s1[150];
+    	cin>>s;
+    	
+    	int len;
+    	len=strlen(s);
+    	
+    	int i;
+    	
+    	for(i=0;i<len;i++)
+    	{
+    		if(i==(len-1))
+    			s1[i]=s[i]+s[0];
+    		else
+    		s1[i]=s[i]+s[i+1];
+        }
+     
+        for(i=0;i<len;i++)
+        	cout<<s1[i]
+    	
+    	return 0;
+    } 
+
+ 
