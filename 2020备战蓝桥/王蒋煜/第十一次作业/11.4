@@ -1,0 +1,19 @@
+#include<string>
+#include<cctype>
+#include<iostream>
+using namespace std;
+
+int main()
+{
+    string str;
+    cout<<"输入一个字符串"<<endl;
+    getline(cin,str);
+    int c=0;
+    for(string::size_type i=0;i<str.size();i++)
+    {
+	  if (str[i]>='0' && str[i]<='9')
+		c++;
+    }
+    cout<<"数字的个数"<<c<<endl;
+    return 0;
+}
