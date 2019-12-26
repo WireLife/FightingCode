@@ -1,0 +1,30 @@
+#include<cstdio>
+
+int a[55];
+int main()
+{
+    int n;
+    while (scanf("%d",&n)==1&&n)
+    {
+        for (int i=0;i<n;i++)
+            a[i]=i+1;
+        int f=0,r=n-1;
+        if (n==1)
+        {
+            printf("Discarded cards:\n");
+            printf("Remaining card: %d\n",a[f]);
+        }
+       else
+       {
+            printf("Discarded cards: ");
+            while (f<r-1)
+            {
+                printf("%d, ",a[f++]);
+                a[++r]=a[f++];
+            }
+            printf("%d\n",a[f]);
+            printf("Remaining card: %d\n",a[r]);
+       }
+    }
+    return 0;
+}
