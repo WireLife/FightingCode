@@ -1,0 +1,30 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n,i,a[110];
+	while(cin>>n && n)
+	{
+		for(i=1;i<=n;i++)
+			a[i]=i;
+		cout<<"Discarded cards:";
+		int h=1,t=n;
+		for(i=1;i<n;i++)
+		{
+			if(h<t)
+			{
+				cout<<" "<<a[h];
+				h++;
+			}
+			if(h<t)
+			{
+				cout<<",";
+				t++;
+				a[t]=a[h];
+				h++;
+			}
+		}	
+		cout<<"\n";
+		cout<<"Remaining card: "<<a[t]<<endl;
+	}
+}
