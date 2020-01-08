@@ -1,0 +1,42 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+int main()
+{
+    freopen("data5_4_h.in", "r", stdin);
+    freopen("data5_4_h.out", "w", stdout);
+
+    int num;
+    while (cin >> num && num!=0)
+    {
+        map<int, int> first_id_map, second_id_map;
+        vector<int> first_id_vec;
+        for (int i = 0; i < num; i++)
+        {
+            int f, s;
+            cin >> f >> s;
+            first_id_map[f] = s;
+            second_id_map[s] = f;
+            first_id_vec.push_back(f);
+        }
+        bool flag = true;
+        for (int i = 0; i < num; i++)
+            if (first_id_map[first_id_vec[i]] != second_id_map[first_id_vec[i]])
+            {
+                flag = false;
+                break;
+            }
+        if (flag)
+            cout << "YES" << endl;
+        else
+            cout << "NO" << endl;
+    }
+
+    freopen("CON", "r", stdin);
+    freopen("CON", "w", stdout);
+    return 0;
+}
