@@ -1,0 +1,74 @@
+#include <iostream>
+#include <string>
+#include <cstdio>
+#include <iomanip>
+#include <map>
+#include <set>
+#include <vector>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+
+set<string> ans;
+vector<string> data;
+
+bool issame(const string &part, const string &whole)
+{
+    if(whole.size()<=part.size())
+    {
+        return false;
+    }
+    for(int i=0; i<part.size(); i++)
+    {
+        if(part[i]!=whole[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main()
+{
+    string s;
+    while(cin >> s)
+    {
+        data.push_back(s);
+    }
+    for(int i=0; i<data.size()-1; i++)
+    {
+        if(data[i].empty())
+        {
+            continue;
+        }
+        for(int j=i+1; j<data.size(); j++)
+        {
+            if(data[j].empty())
+            {
+                continue;
+            }
+            if(data[i][0]!=data[j][0])
+            {
+                break;
+            }
+            if(issame(data[i], data[j]))
+            {
+                string t;
+                for(int k=data[i].size(); k<data[j].size(); k++)
+                {
+                    t.push_back(data[j][k]);
+                }
+                vector<string>::iterator iter = find(data.begin(), data.end(), t);
+                if(iter!=data.end())
+                {
+                    ans.insert(data[j]);
+                }
+            }
+        }
+    }
+    for(set<string>::iterator it = ans.begin(); it!=ans.end(); ++it)
+    {
+        cout << *it << endl;
+    }
+    return 0;
+}
