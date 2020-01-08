@@ -1,0 +1,71 @@
+#include <iostream>
+#include <set>
+#include <algorithm>
+#include <vector>
+#include <math.h>
+    #include <sstream>
+    #include <fstream>
+    #define FILE
+#define maxn 1005
+using namespace std;
+typedef pair<int,int> point;
+set<point>coord;
+int main()
+{
+    //文件输入输出，保留
+    /*#ifdef FILE
+        ifstream in("data.txt");
+        ofstream out("output.txt");
+        cin.rdbuf(in.rdbuf());
+        cout.rdbuf(out.rdbuf());
+    #endif*/
+    int t,n,x[maxn],y[maxn];
+    cin >> t;
+    while(t--)
+    {
+        coord.clear();
+        cin >> n;
+ 
+        int symmetry = 0,leftP = 99999,rightP = -99999;
+        for(int i=0;i<n;i++)
+        {
+            cin >> x[i] >> y[i];
+            x[i] *= 2;//给横坐标*2为了避免对称轴为小数
+            symmetry += x[i];
+            coord.insert(point(x[i],y[i]));
+            leftP = min(leftP,x[i]);
+            rightP = max(rightP,x[i]);
+        }
+        symmetry = (leftP+rightP)/2;
+        //for(set<point>::iterator it=coord.begin();it!=coord.end();it++ )
+        //    cout << it->first << "--" << it->second <<endl;
+        bool flag = true;
+        for(int i=0;i<n;i++)
+        {
+            if(x[i] == symmetry)
+                continue;
+            int distances = 2*abs(x[i] - symmetry);
+            if(x[i] < symmetry)//左边
+            {
+                if(coord.find(point(x[i] + distances,y[i])) == coord.end())
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            else//右边
+            {
+                if(coord.find(point(x[i] - distances,y[i])) == coord.end())
+                {
+                    flag = false;
+                    break;
+                }
+            }
+        }
+        if(flag)
+           cout << "YES" <<endl;
+        else
+           cout << "NO" << endl;
+    }
+    return 0;
+}
