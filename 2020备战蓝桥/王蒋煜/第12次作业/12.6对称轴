@@ -1,0 +1,33 @@
+#include<iostream>
+using namespace std;
+const int N = 1005;
+int x[N], y[N], n, zhou;
+int check(int i)
+{
+	for (int j = 0; j < n; ++j)
+		if (y[i] == y[j] && (x[i] + x[j]) / 2 == zhou) return 1;
+	return 0;
+}
+int main()
+{
+	int t, MIXx, MANx, a, i;
+	cin >> t;
+	while (t--)		//要进行几组
+	{
+		MIXx = MANx = 0;
+		cin >> n;		//每组几个点
+		for (i = 0; i < n; i++)
+		{
+			cin >> a >> y[i];		//输入点的坐标
+			x[i] = a * 2;
+			if (x[i] < x[MIXx]) MIXx = i;		//求最大最小的x坐标
+			if (x[i] > x[MANx]) MANx = i;
+		}
+		zhou = (x[MIXx] + x[MANx]) / 2;
+		for (i = 0; i < n; ++i)
+			if (!check(i)) break;		//判断是否对称
+		if (i >= n) cout << "YES" << endl;
+		else cout << "NO" << endl;
+	}
+	return 0;
+}
