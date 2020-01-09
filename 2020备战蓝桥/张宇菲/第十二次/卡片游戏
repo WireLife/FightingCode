@@ -1,0 +1,40 @@
+#include<iostream>
+#include<iomanip>
+#include<vector>
+#include<sstream>
+#include<string>
+using namespace std;
+int main()
+{
+   string c,s;
+   int num,n=0,i,j;
+   vector<string>code[200];
+   int max[200]={0};
+   cin>>num;
+   num++;
+   while(num)
+   {
+	   getline(cin,c);
+	   stringstream ss(c);
+	   i=0;
+	   while(ss>>s)
+	   {
+	       code[n].push_back(s);
+           max[i]>s.length()?i++:max[i++]=s.length()+1;
+	   }
+	   n++;
+
+	   num--;
+   }
+   for(i=0;i<=n;i++)
+   {  
+	   j=0;
+	   for(vector<string>::iterator it=code[i].begin();it!=code[i].end();it++,j++)
+	   {
+		   cout<<setw(max[j])<<setiosflags(ios::left)<<*it;
+       }
+	   cout<<endl;
+   }
+   return 0;
+}
+
