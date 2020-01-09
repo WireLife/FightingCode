@@ -1,0 +1,54 @@
+/*
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <algorithm>
+using namespace std;
+#define MAX_LEN 1000
+typedef struct Pot
+{
+	double x;
+	double y;
+	bool operator<(struct Pot& other)const
+	{
+		return x < other.x;
+	}
+}Pots;
+
+int main()
+{
+
+	Pots pos[MAX_LEN];
+	double check_pos;
+	int total_num, num, i;
+	cout << "你想输入几组数据？" << endl;
+	cin >> total_num;
+	while (total_num--)
+	{
+		cout << "输入个数？" << endl;
+		cin >> num;        //信息获取
+		cout << "请输入:" << endl;
+		for (i = 0; i < num; i++)
+			cin >> pos[i].x >> pos[i].y;
+		sort(pos, pos + num);//排序后我们只需要找到中心点（最靠近中间的那两个，或者那一个点）即可check_pos
+		if (num % 2 == 0)
+			check_pos = (pos[num / 2 - 1].x + pos[num / 2].x) / 2;
+		else
+			check_pos = pos[num / 2].x;
+
+		bool flag = true;
+		for (int i = 0; i < num / 2; i++)        //进行信息校验
+			if (pos[i].y != pos[num - i - 1].y || (pos[i].x + pos[num - i - 1].x) / 2 != check_pos)
+			{
+				flag = false;
+				break;
+			}
+		if (flag)
+			cout << "YES" << endl;
+		else
+			cout << "NO" << endl;
+	}
+
+	system("pause");
+	return 0;
+}
+*/
