@@ -1,0 +1,102 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+static int flag = 1;
+struct BOOK
+{
+	char bookname[20];
+	char author[20];
+}Book[50];
+
+void Sort()
+{
+	for (int i = 0; i < 50; i++)
+	{
+		for (int j = 0; j < 50 - j; j++)
+		{
+			if (Book.author[j] > Book.author[j + 1])
+			{
+				int temp = Book.author[j];
+				Book.author[j] = Book.author[j + 1];
+				Book.author[j + 1] = temp;
+			}
+		}
+	}
+}
+
+void Borrow()
+{
+	int i;
+	char temp[20];
+	cout << "请输入借阅图书名：" << endl;
+	for (i = 0; i < 20; i++)
+		cin >> temp[i];
+	for (i = 0; i < 50; i++)
+	{
+			if (strcmp(temp, Book[i].bookname) == 0&&flag==1)
+			{
+				cout << "借阅成功！" << endl;
+				flag = 0;
+			}
+			else
+				cout << "图书不存在！" << endl;
+
+	}
+}
+
+void Return()
+{
+	char temp1[20],temp2[20];
+	cout << "请输入归还图书名：" << endl;
+	for (int i = 0; i < 20; i++)
+		cin >> temp1[i];
+	cout << "请输入归还图书作者："<<endl;
+	for (int i = 0; i < 20; i++)
+	{
+		cin >> temp2[i];
+	}
+	FILE *fp = NULL;
+	errno_t err = 0;
+	err = fopen_s(&fp,"D:\\mybook.txt", "w+");
+	for (int i = 0; i < 50; i++)//循环写入到文件
+	{
+		fwrite(&Book,sizeof(struct BOOK),1, fp);
+	}
+	fclose(fp);
+	cout << "归还成功！" << endl;
+
+}
+
+void Shelve()
+{
+
+}
+
+int menu()
+{
+	int i;
+	system("cls");
+	printf("********************************************************************\n");
+	printf("*                           1、borrow                              *\n");
+	printf("*                           2、return                              *\n");
+	printf("*                           3、shelve                              *\n");
+	printf("********************************************************************\n");
+	cout << "请选择功能：" << endl;
+	cin >> i;
+	if (i < 1 || i>3)
+		cout << "请重新选择：" << endl;
+	return i;
+}
+
+int main()
+{
+	int key =menu();  
+	switch (key)
+	{
+	case 1:Borrow(); break;
+	case 2:Return(); break;
+	case 3:Shelve(); break;
+	}
+	return 0;
+}
