@@ -1,0 +1,36 @@
+#include<iostream>
+#include<set>
+#include<string>
+#include<cstdio>
+
+using namespace std;
+int main()
+{
+	int num,i,j,m;
+    string t;
+    set<string>s;
+	cin>>num;
+	i=0;
+	while(num--)
+	{
+		cin>>t;
+		s.insert(t);
+			
+	}
+
+	set<string>::iterator it;
+		for(it=s.begin();it!=s.end();it++)
+		{
+			t=*it;
+			//cout<<t<<endl;
+			for(j=1;j<t.size()-1;j++)
+			{
+				//cout<<t.substr(0,j)<<"    "<<t.substr(j)<<endl;
+				if(s.count(t.substr(0,j))&&s.count(t.substr(j)))
+				{
+					cout<<t<<endl;
+				}
+			}
+		}
+	return 0;
+}
