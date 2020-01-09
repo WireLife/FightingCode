@@ -1,0 +1,28 @@
+
+#include <iostream>
+#include <set>
+#include <string>
+using namespace std;
+int main()
+{
+    set<string> s;  //创建字符型集合
+    string tmp;	  //空串
+    while (cin>>tmp && tmp[0]!='*')	    //“*”结束
+	  s.insert(tmp);	    //插入数据
+    set<string>::iterator it;		//建立迭代器
+    for (it=s.begin();it!=s.end();it++)
+    {
+        tmp=*it;
+        for (int i=1; i<tmp.length(); i++)
+        {
+            if (s.find(tmp.substr(0,i))!=s.end() && s.find(tmp.substr(i,tmp.length()-i))!= s.end())
+            {//find(x);返回一个指向x的迭代器。如果x不存在，返回的迭代器=end。若不等于end，则说明存在
+		    // str.substr(startpos, length);其中 startpos 是起始字符的序号，length 是[从 startpos 开始]取的字符串长度（包括startpos ）。
+                cout<<tmp<<endl;
+                break;
+            }
+        }
+    }
+    return 0;
+
+ }
