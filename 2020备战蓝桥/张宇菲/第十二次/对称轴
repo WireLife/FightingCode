@@ -1,0 +1,33 @@
+#include<iostream>
+#include<set>
+#include<map>
+using namespace std;
+typedef pair<int,int>point;
+int main()
+{
+	int n,x,y,sum=0,mid,flag=1;
+	set<point>p;
+	cin>>n;
+	while(n--)
+	{
+		cin>>x>>y;
+		p.insert(make_pair(x,y));
+		sum+=x;
+	}
+	mid=sum/p.size();
+	set<point>::iterator it;
+	for(it=p.begin();it!=p.end();it++)
+	{
+		point po=*it;
+		if(!p.count(point(mid*2-po.first,po.second)))
+		{
+			flag=0;
+			break;
+		}
+	}
+	if(flag==1)
+		cout<<"yes"<<endl;
+	else
+		cout<<"no"<<endl;
+return 0;
+}
