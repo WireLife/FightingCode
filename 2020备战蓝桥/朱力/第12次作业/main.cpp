@@ -1,40 +1,36 @@
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
+//12.1
+#include<bits/stdc++.h>
+//²Î¿¼ÍøÉÏÃ»¶®ÌâÄ¿ÒâË¼
 using namespace std;
-
-int main()
-{
-    int n;
-    cout<<"è¯·è¾“å…¥æ˜¯å‡ å…ƒç»„"<<endl;
-    cin>>n;
-    cout<<"è¯·è¾“å…¥æ•°æ®æˆå‘˜"<<endl;
-    int a[n];
+int Max[200];
+vector<string> s[1010];
+int read(){
+    int x=0,f=1;char ch=getchar();
+    for(;ch<'0'||ch>'9';ch=getchar())if(ch=='-')f=-1;
+    for(;ch>='0'&&ch<='9';ch=getchar())x=(x<<1)+(x<<3)+ch-'0';
+    return x*f;
+}
+int main(){
+    int n=0;string ss,buf;
+    while(getline(cin,ss)){
+        int t=0;
+        stringstream S(ss);
+        while(S>>buf){
+            Max[t]=max((int)buf.length(),Max[t]);//½«Ã¿Ò»ÁĞµÄ³¤¶È
+            //×î³¤µÄµ¥´Ê´óĞ¡±£´æÏÂÀ´
+            s[n].push_back(buf);//½«µ±Ç°µÄµ¥´Ê¼ÓÈëÏòÁ¿ÖĞ´¢´æ
+            t++;
+        }
+        n++;
+    }
+    cout<<setiosflags(ios::left);//½«Êä³ö¸ñÊ½¶¨ÒåÎª×ó¶ÔÆëÊä³ö
     for(int i=0;i<n;i++){
-        scanf("%d",&a[i]);
+        int j=0;
+        for(j;j<s[i].size()-1;j++)
+            cout<<setw(Max[j]+1)<<s[i][j];//setw()½«À¨ºÅÀïµÄ
+            //²ÎÊıµÄ´óĞ¡
+            //×÷ÎªÊä³öµÄÖµÕ¼µÄÎ»ÖÃ´óĞ¡
+        cout<<s[i][j]<<endl;
     }
-    int k=1000;
-    int count=0;
-    while(k){
-        a[n]=abs(a[0]-a[n]);
-        for(int i=0;i<n-1;i++){
-            a[i]=abs(a[i+1]-a[i]);
-        }
-        for(int i=0;i<n;i++){
-            if(a[i]==0)
-                count++;
-        }
-        if(count==n)
-        {
-            cout<<"is zero!"<<endl;
-            return 0;
-        }
-        else
-        {
-            k--;
-            continue;
-        }
-    }
-    cout<<"is loop!"<<endl;
     return 0;
 }
