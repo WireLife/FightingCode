@@ -1,0 +1,44 @@
+#include<iostream>
+using namespace std;
+int Wo(int a,int b)
+{
+	if(a>b)
+		return (a-b);
+	else
+		return (b-a);
+}
+int main()
+{
+	int n;
+	cin>>n;
+    int *arr=new int[n];
+	int i,j=0,k=0;
+	for(i=0;i<n;i++)
+	{
+		cin>>arr[i];
+	}
+    int temp;
+	while(k<1000){
+		k++;
+		temp=arr[0];
+	    for(i=0;i<n-1;i++)
+		{
+            arr[i]=Wo(arr[i],arr[i+1]);
+		}
+		arr[n-1]=Wo(arr[n-1],temp);
+		for(i=0;i<n;i++)
+		{
+			if(arr[i]==0)
+				j++;
+		}
+		if(j!=n&&k==1000){
+			cout<<"LOOP"<<endl;
+			}
+		else if(j==n&&k<=1000){
+			cout<<"ZERO"<<endl;
+		break;	}
+		j=0;
+
+	}
+	return 0;
+}
