@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+
+struct point
+{
+	int *x, *y;
+}pset;
+
+int main()
+{
+	int i, j, n, m = 0;
+	cout << "请输入点集个数：\n" << endl;
+	cin >> n;
+	point *p = (point *)malloc(n * sizeof(point));
+	
+	cout << "请输入所有点横坐标：" << endl;
+	for (i = 0; i < n; i++)
+	{
+		cin >> pset.x[i] ;
+		m += pset.x[i];//横坐标均值m/n
+	}
+	cout << "请输入所有点纵坐标：" << endl;
+	for (i = 0; i < n; i++)
+	{
+		cin >> pset.y[i];
+	}
+	for ( i = 0; i < n; i++)
+	{
+		for (j = 0; j < n; j++)
+		{
+			if (pset.x[i] == pset.y[j] && 2 * (m / n) - pset.x[i] == pset.y[j])
+				cout << "YES" << endl;
+			else
+				cout << "NO" << endl;
+		}
+	}
+	return 0;
+}
