@@ -1,21 +1,11 @@
 #include <iostream>
 using namespace std;
-int max(int a[][2],int N)
-{
-    int Max=a[0][1],i;
-    for(i=1;i<N;i++)
-    {
-        if(a[i][1]>Max)
-            Max=a[i][1];
-    }
-    return Max;
-}
+
 int main(int argc, const char * argv[]) {
-    int N,i,j,xnSym=0,xSym=0,m,x,Max,xS,k,key;
+    int N,i,j,xnSym=0,xSym=0,m,x,xS,k,key;
     scanf("%d",&N);
     int co_ord[N][2];
-    int max(int a[][2],int N);
-    Max=max(co_ord,N);
+    
      for(i=0;i<N;i++)
         scanf("%d %d",&co_ord[i][0],&co_ord[i][1]);
     k=0;
