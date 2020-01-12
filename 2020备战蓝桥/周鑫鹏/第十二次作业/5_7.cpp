@@ -15,7 +15,7 @@ int main()
         vec.push_back(t);
         cin>>t;
     }
-    cout<<"λ��:";
+    cout<<"Î»ÖÃ:";
     cin>>a;
     vector<int>::iterator it=vec.begin();
     vector<int>::iterator b=it+a;
@@ -35,7 +35,7 @@ int main()
         }
         it++;
     }
-    cout<<"���ʱ��:"<<k<<endl;
+    cout<<"Íê³ÉÊ±¿Ì:"<<k<<endl;
     return 0;
 }
 int M(vector<int>::iterator it,vector<int>::iterator it1)
