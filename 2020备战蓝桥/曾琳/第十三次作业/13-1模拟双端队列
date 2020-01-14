@@ -1,0 +1,153 @@
+#include<iostream>
+using namespace std;
+struct queue
+{
+	int data[2000];
+	int top0;
+	int end0;
+	void front_push(int a)
+	{
+		if (top0 == 0)
+		{
+			cout << "队列不能首插入！" << endl;
+		}
+		data[top0] =a;
+		top0--;
+	}
+	void push_back(int a)	
+	{
+		if (end0 == 1999)
+		{
+			cout << "队列不能进行尾插！" << endl;
+		}
+		data[end0] = a;
+		end0++;
+	}
+	bool empty_queue()
+	{
+		if (top0 == end0)
+			return true;
+		else
+			return false;
+	}
+	int queue_size()
+	{
+		return end0 - top0;
+	}
+	void front_delete()
+	{
+		if (top0 == end0)
+		{
+			cout << "队列为空，无法首删" << endl;
+		}
+		else
+		{
+			data[top0] = 0;
+			top0++;
+
+		}
+
+	}
+	void back_delete()
+	{
+		if (top0 == end0)
+		{
+			cout << "队列为空，无法首删" << endl;
+		}
+		else
+		{
+			data[end0] = 0;
+			end0--;
+		}
+	}
+	bool Clear_queue()
+	{
+		if (top0 == end0)
+		{
+			cout << "队列为空，无法清空" << endl;
+			return false;
+		}
+		else
+		{
+			while (end0 != top0)
+			{
+				data[top0] = 0;
+				data[end0] = 0;
+				end0--;
+				top0++;
+			}
+		}
+		return true;
+	}
+	void Print_queue()
+	{
+		for (; top0 != end0; top0++)
+		{
+			cout << data[top0] << " ";
+		}
+	}
+	int get_front()
+	{
+		return data[top0+1];
+	}
+	int get_back()
+	{
+		return data[end0-1];
+	}
+};
+
+int main()
+{
+	queue q1;
+	q1.top0 = q1.end0 = 1000;
+	int order;  
+	int x;
+	while (1)	
+	{
+		cout << " 请选择命令:1-首插入队操作，2-出队操作,3-查询队列长度,4-尾插 ,5-尾删，6-首删,7-退出"<<endl;
+		cin >> order;
+		switch (order)
+		{
+		case 1: cout << " 首插入队的数值:" << endl;
+			cin >> x;  
+			q1.front_push(x);
+			break;
+		case 2:
+			if (q1.empty_queue())
+			{
+				cout << " 队列为空" << endl;
+				break;
+			}
+			//cout << "首删:出队的数据" << endl;
+			q1.front_delete();
+			//q1.Print_queue(); break;
+
+			break;
+		case 4: cout << " 请输入需要尾插入队的数值:" << endl;
+			cin >> x;    
+			q1.push_back(x);
+			break;
+		case 5:
+			if (q1.empty_queue())
+			{
+				cout << " 队列为空" << endl;
+				break;
+			}
+			//cout << "尾删:出队的数据" << endl;
+			cout << q1.get_back() << endl;
+			q1.back_delete();
+			//q1.Print_queue(); break;  
+		case 6:
+			cout << q1.get_front() << endl;
+			q1.front_delete(); break;
+		case 7:exit(1);
+		case 8:q1.Print_queue(); break;
+		case 3:
+			cout << q1.queue_size() << endl;
+		default:cout << "输入无效!" << endl;
+		}
+	}
+
+	system("pause");
+	return 0;
+}
