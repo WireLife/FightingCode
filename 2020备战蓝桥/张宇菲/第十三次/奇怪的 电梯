@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+int step[201],lift[201];
+int n,a,b;
+int main()
+{
+        cin>>n>>a>>b;
+        for (int i=1;i<=n;i++)
+        {
+                cin>>lift[i];
+                step[i]=-1;
+        }
+        step[a]=0;
+        int l=1,p=0,j;
+        while (l>0&&step[b]==-1)
+        {
+           l=0;
+           for (int i=1;i<=n;i++)
+              if (step[i]==p)
+              {
+                  j=i+lift[i];
+                  if (j<=n&&step[j]==-1)
+                  {
+                      step[j]=p+1;
+                      l=1;
+                   }
+                   j=i-lift[i];
+                   if (j>0&&step[j]==-1)
+                   {
+                       step[j]=p+1;
+                       l=1;
+                   }
+             }
+             p++;
+        }
+        cout<<step[b]<<endl;
+        return 0;
+}
