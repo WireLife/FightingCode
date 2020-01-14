@@ -1,0 +1,61 @@
+#include<iostream>
+using namespace std;
+#define Minn(x,y) ((x)<(y)?(x):(y))
+#define Maxx(x,y) ((x)>(y)?(x):(y))
+int father[102];
+
+int search(int i)
+{
+    int r,l;
+    for(r=i;r!=father[r];r=father[r]);
+    l=i;
+    if(i!=r)
+        while(father[i]!=r)
+        {
+            l=father[i];
+            father[i]=r;
+            i=l;
+        }
+    return r;
+}
+
+void link(int a,int b)
+{
+    int x=search(a),y=search(b);
+    int min,max;
+    min=Minn(x,y);
+    max=x+y-min;
+    father[max]=min;
+}
+
+int main()
+{
+    int n,k,i,x,y,cou=1,visit[102]={1,0},cc[102]={0},mm;
+    cin>>n>>k;
+    for(i=0;i<n;i++)
+        father[i]=i;
+    for(i=0;i<k;i++)
+    {
+        scanf("%d%d",&x,&y);
+        link(x,y);
+    }
+    for(i=0;i<n;i++)
+        search(i);
+    for(i=0;i<n;i++)
+    {
+        if(!visit[father[i]])
+        {
+            cou++;
+            visit[father[i]]=1;
+        }
+        cc[father[i]]++;
+    }
+    mm=-1;
+    for(i=0;i<n;i++)
+    {
+        if(cc[i]>mm)
+            mm=cc[i];
+    }
+    cout<<cou<<" "<<mm<<endl;
+    return 0;
+}
