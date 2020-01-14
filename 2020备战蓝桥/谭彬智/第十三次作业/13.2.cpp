@@ -1,168 +1,141 @@
 #include<iostream>
 using namespace std;
-struct link
+
+struct Node
 {
-	int num;
-	struct link* front;
-	struct link* next;
+	int data;
+	struct Node *prev;
+	struct Node *next;
 };
-int size=0;
-link* top=(struct link*)malloc(sizeof(struct link)); 
-link* end=(struct link*)malloc(sizeof(struct link)); 
-
-link* w1=(struct link*)malloc(sizeof(struct link)); 
-link* w2=(struct link*)malloc(sizeof(struct link));
-link* p=(struct link*)malloc(sizeof(struct link));
-void inserttop(int x)
-{	
-	w1=top->next;	
-	p->num=x;
-	//链接
-	top->next=p;
-	p->next=w1;
-	w1->front=p;
-	p->front=top;
-
-	size++;
-}
-
-void insertend(int x)
+typedef struct Node Node;
+Node *Get_node(int item,Node *prev0,Node *next0)
 {
-	w1=end->front;
-	p->num=x;
-
-	w1->next=p;
-	p->next=end;
-	end->front=p;
-	p->front=w1;
-
-	size++;
+	Node *p=(Node*)malloc(sizeof(Node));
+	p->data=item;
+	p->prev=prev0;
+	p->next=next0;
+	return p;
 }
-
-void insertbefore(int n,int x)
+typedef struct
 {
-	p->num=x;
-	w1=top->next;
-	for(int i=0;i<size;i++)
+	Node *head;
+	Node *tail;
+	int size;
+	int tag;//标记重组
+}List;
+void Init(List *L)
+{
+	L->head=(Node*)malloc(sizeof(Node));
+	L->tail=(Node*)malloc(sizeof(Node));
+	L->head->next=L->tail;
+	L->tail->prev=L->head;
+	L->size=0;
+	L->tag=0;
+}
+Node *Begin(List *L){return L->head->next;}
+Node *End(List *L){return L->tail;}
+void Insert(List *L,Node *current,int item)
+{
+	Node *p=current;
+	L->size++;
+	p->prev->next=Get_node(item,p->prev,p);
+	p->prev=p->prev->next;
+}
+void Erase(List *L,Node *current)
+{
+	Node *p=current;
+	L->size--;
+	p->prev->next=p->next;
+	p->next->prev=p->prev;
+	free(p);
+}
+Node *find1(List *L,int item)
+{
+	Node *p=Begin(L);
+	for(int i=0;i<L->size;i++)
 	{
-		if(w1->num==n)
-		{
-			w2=w1->front;
-			w1->front=p;
-			p->front=w2;
-			w2->next=p;
-			p->next=w1;
-
-			size++;
-		}
-		else w1=w1->next;
+		if(p->data==item)
+			return p;
+		else p=p->next;
 	}
 }
-
-void insertback(int n,int x)
+void find(List *L,int item)
 {
-	p->num=x;
-	w1=top->next;
-	for(int i=0;i<size;i++)
+	Node *p=Begin(L);
+	for(int i=0;i<L->size;i++)
 	{
-		if(w1->num==n)
+		if(p->data==item)
 		{
-			w2=w1->next;
-			w1->next=p;
-			p->next=w2;
-			w2->front=p;
-			p->front=w1;
-
-			size++;
-		}
-		else w1=w1->next;
-	}
-}
-
-void remove(int n)
-{
-	p=top->next;
-	for(int i=0;i<size;i++)
-	{
-		if(p->num==n)
-		{
-			w2=p->next;
-			w1=p->front;
-			w1->next=w2;
-			w2->front=w1;
-
-			size--;
+			cout<<p->prev->data<<' '<<p->next->data<<"中间"<<endl;
+			break;
 		}
 		else p=p->next;
 	}
 }
-
-void find(int n)
+void inserttop(List *L,int item){if(L->tag==0)Insert(L,Begin(L),item);else if(L->tag==1)Insert(L,End(L),item);}
+void insertend(List *L,int item){if(L->tag==0)Insert(L,End(L),item);else if(L->tag==1)Insert(L,Begin(L),item);}
+void insertbefore(List *L,int n,int item){Node *p=find1(L,n);if(L->tag==0)Insert(L,p,item);else if(L->tag==1)Insert(L,p->next,item);}
+void insertback(List *L,int n,int item){Node *p=find1(L,n);if(L->tag==0)Insert(L,p->next,item);else if(L->tag==1)Insert(L,p,item);}
+void remove(List *L,int item){Node *p=find1(L,item);Erase(L,p);}
+void ttraversal(List *L)
 {
-	p=top->next;
-	for(int i=0;i<size;i++)
+	if(L->tag==0)
 	{
-		if(p->num==n)
-		{
-			w2=p->next;
-			w1=p->front;
-			cout<<"前一个节点元素："<<w1->num<<"后一个节点元素："<<w2->num<<endl;
-		}
-		else p=p->next;
-	}
-}
-
-void ttraversal()
-{
-	w1=top->next;
-	for(int i=0;i<size;i++)
+	Node *p=Begin(L);
+	for(int i=0;i<L->size;i++)
 	{
-		cout<<w1->num<<" ";
-		w1=w1->next;
+		cout<<p->data<<' ';
+		p=p->next;
 	}
 	cout<<endl;
-}
-
-void etraversal()
-{
-	w1=end->front;
-	for(int i=0;i<size;i++)
+	}
+	else if(L->tag==1)
 	{
-		cout<<w1->num<<" ";
-		w1=w1->front;
+	Node *p=End(L);
+	for(int i=0;i<L->size;i++)
+	{
+		p=p->prev;
+		cout<<p->data<<' ';		
 	}
 	cout<<endl;
-}
-
-void modify(int n,int x)
-{
-	p=top->next;
-	for(int i=0;i<size;i++)
-	{
-		if(p->num==n)
-			p->num=x;
-		else p=p->next;
 	}
 }
-
-void zize()
+void etraversal(List *L)
 {
-	cout<<"链表长度为："<<size;
+	if(L->tag==0)
+	{
+	Node *p=End(L);
+	for(int i=0;i<L->size;i++)
+	{
+		p=p->prev;
+		cout<<p->data<<' ';		
+	}
+	cout<<endl;
+	}
+	else if(L->tag==1)
+	{
+	Node *p=Begin(L);
+	for(int i=0;i<L->size;i++)
+	{
+		cout<<p->data<<' ';
+		p=p->next;
+	}
+	cout<<endl;
+	}
+}
+void modify(List *L,int n,int item){Node *p=find1(L,n);p->data=item;}
+int zize(List *L){return L->size;}
+void reorg(List *L)
+{
+	L->tag=1;
 }
 
-void reorg()
-{
-	p=top;
-	end=p;
-	top=end;
-}
+
 
 int main()
 {
-	top->num=0;
-end->num=-1;
-top->next=end;
-end->front=top;
+	List L;
+	Init(&L);
 	int order;
 	while (order<100)
 	{
@@ -172,25 +145,56 @@ end->front=top;
         switch (order)
 		{
 			int x,x1;
-		case 0:order=100;break;
-		case 1: cout<<"请输入需要插入的数:";
-				 cin>>x;    inserttop(x);break;
-		case 2: cout<<"请输入需要插入的数:";
-				 cin>>x;    insertend(x);break;
-		case 3:cout<<"在哪个数之前插入什么数？"; 
-			cin>>x>>x1;	 insertbefore(x,x1); break;
-		case 4: cout<<"在哪个数之后插入什么数？"; 
-			 cin>>x>>x1;  insertback(x,x1); break;
-	    case 5: cout<<"需要删除哪个数？";
-			cin>>x;   remove(x);  break;
-		case 6: cout<<"请输入需要查找的数:";
-				 cin>>x;    find(x);  break;
-		case 7:  ttraversal();break;
-		case 8:  etraversal();break;
-		case 9: cout<<"请输入需要将什么数修改成何数:";
-			cin>>x>>x1;   modify(x,x1);  break;
-		case 10: zize(); break;
-		case 11: reorg(); break;
+		case 0:
+			order=100;
+			break;
+		case 1: 
+			cout<<"请输入需要插入的数:";
+			cin>>x;   
+			inserttop(&L,x);
+			break;
+		case 2:
+			cout<<"请输入需要插入的数:";
+	       	cin>>x;   
+			insertend(&L,x);
+			break;
+		case 3:
+			cout<<"在哪个数之前插入什么数？"; 
+			cin>>x>>x1;
+			insertbefore(&L,x,x1);
+			break;
+		case 4: 
+			cout<<"在哪个数之后插入什么数？"; 
+			cin>>x>>x1; 
+			insertback(&L,x,x1); 
+			break;
+	    case 5: 
+			cout<<"需要删除哪个数？";
+			cin>>x;  
+			remove(&L,x); 
+			break;
+		case 6: 
+			cout<<"请输入需要查找的数:";
+			cin>>x; 
+			find(&L,x); 
+			break;
+		case 7:  
+			ttraversal(&L);
+			break;
+		case 8:  
+			etraversal(&L);
+			break;
+		case 9:
+			cout<<"请输入需要将什么数修改成何数:";
+			cin>>x>>x1;   
+			modify(&L,x,x1); 
+			break;
+		case 10: 
+			cout<<"链表长度为："<<zize(&L)<<endl;
+			break;
+		case 11:
+			reorg(&L); 
+			break;
 		} 
     }
 	cout<<endl;   
