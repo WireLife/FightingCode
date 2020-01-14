@@ -1,0 +1,115 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+typedef struct node
+{
+	int data;
+	struct node *pre;
+	struct node *next;
+}Node;
+
+Node * createList();//创建
+void insertList(Node* head,int input);//插入
+void traverseNList(Node* head);//正向遍历
+void traversePList(Node* head);//反向遍历
+int lengthList(Node* head);//长度 size
+Node * findDataList(Node* head,int findData);//查找
+void deleteDataList(Node *pfind);//删除
+int main()
+{
+	srand(time(NULL));
+	Node * head = createList();
+	for (int i = 0; i < 10; i++)
+	{
+		insertList(head,rand()%100);
+	}
+	traverseNList(head);
+	//traversePList(head);
+	int listLen = lengthList(head);
+	Node *flist = findDataList(head,0);
+	if (flist)
+	{
+		printf("find!delete data 0\n");
+		deleteDataList(flist);
+		traverseNList(head);
+	}
+	else
+		printf("find none!\n");
+	traverseNList(head);
+
+	
+	return 0;
+}
+Node * createList()
+{
+	Node * head = (Node *)malloc(sizeof(Node));
+	if (NULL == head)
+		exit(-1);
+	head->pre = head;
+	head->next = head;
+	return head;
+}
+void insertList(Node* head,int input)
+{
+	Node * ptr = (Node *)malloc(sizeof(Node));
+	if (NULL == ptr)
+		exit(-1);
+	ptr->data = input;
+	ptr->next = head->next;
+	ptr->pre = head;
+	head->next = ptr;
+	ptr->next->pre = ptr;
+}
+void traverseNList(Node* head)
+{
+	Node* tmp = head->next;
+	while (tmp != head)
+	{
+		printf("%-3d", tmp->data);
+		tmp = tmp->next;
+	}
+}
+void traversePList(Node* head)
+{
+	Node* tmp = head->pre;
+	while (tmp != head)
+	{
+		printf("%-3d", tmp->data);
+		tmp = tmp->pre;
+	}
+}
+int lengthList(Node* head)
+{
+	int len = 0;
+	Node* tmp = head->next;
+	while (tmp != head)
+	{
+		len++;
+		tmp = tmp->next;
+	}
+	return len;
+}
+Node * findDataList(Node* head, int findData)
+{
+	Node* fnext=head->next, *fpre = head->pre;
+	while (fpre != fnext->pre)
+	{
+		if (findData == fnext->data)
+			return fnext;
+		if (findData == fpre->data)
+			return fpre;
+		if (fnext == fpre)
+			break;
+		fnext = fnext->next;
+		fpre = fpre->pre;
+	}
+	return NULL;
+}
+void deleteDataList(Node *pfind)
+{
+	pfind->pre->next = pfind->next;
+	pfind->next->pre = pfind->pre;
+	free(pfind);
+}
+
+
