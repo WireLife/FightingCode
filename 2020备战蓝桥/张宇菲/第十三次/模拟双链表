@@ -1,0 +1,25 @@
+#include<iostream>
+#include<deque>
+using namespace std;
+void showdeque(deque<int>& d) {
+	for (deque<int>::iterator it = d.begin(); it != d.end(); it++) cout << *it << " ";
+	cout << endl;
+}
+int main()
+{
+	deque<int> q1; 
+	for (int i = 1; i <= 20; i++) 
+		q1.push_back(i);
+	showdeque(q1);
+	q1.push_front(1000);
+	q1.push_back(1000);
+	showdeque(q1);
+	q1.pop_front();
+	showdeque(q1);
+	cout << q1.size() << endl;
+	q1.clear();
+	cout<< q1.empty() << endl;
+
+	system("pause");
+	return 0;
+}
