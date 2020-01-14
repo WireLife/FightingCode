@@ -1,0 +1,58 @@
+#include <iostream> 
+using namespace std;
+const int maxn=100000+5;
+int n,leftt[maxn],rightt[maxn]; 
+ 
+void link(int L,int R)
+{
+    rightt[L]=R;leftt[R]=L;
+}
+ 
+int main()
+{
+    int m,kase=0;
+	int i;
+    while(scanf("%d%d",&n,&m)==2){
+        for(i=1;i<=n;i++){
+            leftt[i]=i-1;
+            rightt[i]=(i+1)%(n+1);
+        }
+        rightt[0]=1;leftt[0]=n;
+        int op,X,Y,inv=0;
+ 
+        while(m--){
+            scanf("%d",&op);
+            if(op==4) inv=!inv;
+            else{
+                scanf("%d%d",&X,&Y);
+                if(op==3&&rightt[Y]==X) swap(X,Y); 
+                if(op!=3&&inv) op=3-op;
+                if(op==1&&X==leftt[Y]) continue;
+                if(op==2&&X==rightt[Y]) continue;
+ 
+                int LX=leftt[X],RX=rightt[X],LY=leftt[Y],RY=rightt[Y];
+              
+                if(op==1){
+                    link(LX,RX);link(LY,X);link(X,Y);
+                } 
+                else if(op==2){
+                    link(LX,RX);link(Y,X);link(X,RY);
+                }
+                else if(op==3){
+                    if(rightt[X]==Y) {link(LX,Y);link(Y,X);link(X,RY);}
+                    else {link(LX,Y);link(Y,RX);link(LY,X);link(X,RY);}
+                }
+            }
+        }
+ 
+        int b=0;
+        _int64 ans=0;
+        for(i=1;i<=n;i++){
+            b=rightt[b]; 
+            if(i%2==1) ans+=b;
+        }
+        if(inv&&n%2==0) ans=(_int64)n*(n+1)/2-ans; 
+        printf("Case %d:  %lld\n",++kase,ans);
+    }
+    return 0;
+}
