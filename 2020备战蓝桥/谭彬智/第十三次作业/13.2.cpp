@@ -127,7 +127,10 @@ void modify(List *L,int n,int item){Node *p=find1(L,n);p->data=item;}
 int zize(List *L){return L->size;}
 void reorg(List *L)
 {
-	L->tag=1;
+	if(L->tag==0)
+    	L->tag=1;
+	else if(L->tag==1)
+		L->tag=0;
 }
 
 
