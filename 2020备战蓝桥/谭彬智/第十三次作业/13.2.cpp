@@ -41,13 +41,15 @@ void Insert(List *L,Node *current,int item)
 	p->prev->next=Get_node(item,p->prev,p);
 	p->prev=p->prev->next;
 }
-void Erase(List *L,Node *current)
+Node *Erase(List *L,Node *current)
 {
 	Node *p=current;
+	Node *re=p->next;
 	L->size--;
 	p->prev->next=p->next;
 	p->next->prev=p->prev;
 	free(p);
+	return re;
 }
 Node *find1(List *L,int item)
 {
@@ -76,7 +78,7 @@ void inserttop(List *L,int item){if(L->tag==0)Insert(L,Begin(L),item);else if(L-
 void insertend(List *L,int item){if(L->tag==0)Insert(L,End(L),item);else if(L->tag==1)Insert(L,Begin(L),item);}
 void insertbefore(List *L,int n,int item){Node *p=find1(L,n);if(L->tag==0)Insert(L,p,item);else if(L->tag==1)Insert(L,p->next,item);}
 void insertback(List *L,int n,int item){Node *p=find1(L,n);if(L->tag==0)Insert(L,p->next,item);else if(L->tag==1)Insert(L,p,item);}
-void remove(List *L,int item){Node *p=find1(L,item);Erase(L,p);}
+Node *remove(List *L,int item){Node *p=find1(L,item);Node *p2=Erase(L,p);return p2;}
 void ttraversal(List *L)
 {
 	if(L->tag==0)
