@@ -1,0 +1,56 @@
+#include<iostream>
+#include<queue>
+#include<cstring>
+using namespace std;
+int n,k;
+int a[20],b[20];
+bool f[10000];
+queue<int> q;
+void init();
+void work();
+int main()
+{
+	init();
+	work();	
+	return 0;
+}
+void init()
+{
+	memset(f,0,sizeof(f));
+	cin>>n;
+	cin>>k;
+	for(int i=1;i<=k;i++) cin>>a[i]>>b[i];	
+}
+void work()
+{
+	int tot=0;
+	f[n]=true;
+	q.push(n);
+	tot++;	
+	while(!q.empty())
+	{
+		int x=q.front();	
+		int wei=1;				
+		while(x>0)
+		{
+			int temp=x%10;			
+			for(int i=1;i<=k;i++)
+			{
+				if(temp==a[i])
+				{
+					int p=q.front()+(b[i]-temp)*wei;			
+					if(!f[p]) 
+					{						
+						q.push(p);
+						f[p]=true;
+						tot++;						
+					}
+				}
+			}
+			x=x/10;			
+			wei*=10;
+		}
+		q.pop();
+	}
+	cout<<tot<<endl;
+}
