@@ -33,7 +33,7 @@ int main() {
     for (int i = 1; i < n; i++) {
         if (f[i] == i) sum++;
     }
-    printf("%d\n", sum);
+    printf("最大家庭数为：%d\n", sum);
     return 0;
 }
 //数组初始化
