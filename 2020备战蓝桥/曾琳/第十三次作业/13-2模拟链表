@@ -1,0 +1,194 @@
+#include<iostream>
+using namespace std;
+typedef struct DuLNode
+{
+	int data;
+	struct DuLNode *prior;
+	struct DuLNode *next;
+}DuLNode, *DuLinkList;
+int InitList(DuLinkList &L)//初始化链表
+{
+	L = new DuLNode;
+	L->next = NULL;
+	L->prior = NULL;
+	return 1;
+
+}
+int ListEmpty(DuLinkList L)//判断是否为空
+{
+	if (L->next == NULL)
+		return 1;
+	else
+		return 0;
+}
+void TraveList(DuLinkList L)//遍历链表
+{
+	DuLNode*p;
+	p= L->next;
+	while (p)
+	{
+		cout<<p->data;
+		p = p->next;
+	}
+	cout << endl;
+
+}
+//计算链表的长度
+int ListLength(DuLinkList L)
+{
+	int length = 0;
+	DuLNode*p = L->next;
+	while (p)
+	{
+		p = p->next;
+		length++;
+	}
+	return length;
+}
+//头插法创建单链表 
+void CreateList_F(DuLinkList &L, int n)
+{
+	L = new DuLNode;
+	L->next = NULL;
+	L->prior = NULL;
+	cout << "请输入元素：" << endl;
+	for (int i = 0; i < n; i++)
+	{
+		cout << "请输入第" << i + 1 << "个元素的值:";
+		DuLNode *s;
+		s = new DuLNode;
+		cin >> s->data;
+		s->next = L->next;
+		s->prior = L;
+		L->next = s;
+	}
+
+}
+
+//尾差法创建单链表
+void CreateList_L(DuLinkList &L, int n)
+{
+	L = new DuLNode;
+	L->next = NULL;
+	L->prior = NULL;
+	DuLNode *p;
+	p = L;
+	cout << "请输入元素：" << endl;
+	for (int i = 0; i < n; i++)
+	{
+		DuLNode* s = new DuLNode;
+		cin >> s->data;
+		s->prior = p;
+		s->next = NULL;
+		p->next = s;
+		p = s;
+	}
+}
+
+int ListDelete(DuLinkList &L, int i, int &e)// 双向链表的删除
+{
+	DuLNode* p = L;
+	int j = 0;
+	while (p->next&&j < i - 1)
+	{
+		p = p->next;
+		j++;
+	}
+	if (!(p->next) || j > i - 1)
+		return 0;
+	DuLNode*q = p->next;
+	e = q->data;
+	p->next = q->next;
+	q->next->prior = p;
+	delete q;
+	return 1;
+
+}
+int ListInsert(DuLinkList &L, int i, int e)	//双向链表的插入 
+{
+	struct DuLNode *p;
+	p = L;
+	int j = 0;
+	while (p->next&&j<i-1)
+	{
+		p = p->next;
+		j++;
+	}
+	if (!(p->next) || j > i - 1)
+	{
+		return 0;
+	}
+	DuLNode *s = new DuLNode;
+	s->data = e;
+	p->next->prior = s;
+	s->next = p->next;
+	p->next = s;
+	s->prior = p;
+	return 1;
+}
+int main()
+{
+	DuLinkList L;
+
+	if (InitList(L))
+	{
+		cout << "链表初始化成功!\n" << endl;
+	}
+	else
+	{
+		cout << "链表初始化失败!\n" << endl;
+	}
+
+	if (ListEmpty(L))
+	{
+		cout << "链表为空!\n" << endl;
+	}
+	else
+	{
+		cout << "链表非空!\n" << endl;
+	}
+
+	cout << "请输入链表的长度:" << endl;
+	int n;
+	cin >> n;
+	CreateList_L(L, n);
+	//CreateList_F(L, n);
+	cout << "遍历链表:\n";
+	TraveList(L);
+
+	cout<< "请输入要删除元素的位置:";
+	int location1;
+	cin >> location1;
+	int e;
+	if (ListDelete(L, location1, e))
+	{
+		cout << "删除成功！\n";
+	}
+	else
+	{
+		cout << "删除失败!\n";
+	}
+	cout << "要删除的元素的值是:" << e;
+	cout << "删除后链表结构:\n";
+	TraveList(L);
+	cout << "删除后链表长度是:" << ListLength(L);
+
+	cout << "请输入要插入的位置和元素的值:" << endl;
+	int location2, value;
+	cin >> location2 >> value;
+	if (ListInsert(L, location2, value))
+	{
+		cout << "插入成功!\n" << endl;
+	}
+	else
+	{
+		cout<<"插入失败!:"<<endl;
+	}
+	cout << "插入后的链表" << endl;
+	TraveList(L);
+	cout << "插入后链表的长度是:" << ListLength(L);
+
+	system("pause");
+
+	return 0;
+}
