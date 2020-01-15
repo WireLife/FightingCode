@@ -1,26 +1,41 @@
 #include<iostream>
 #include<queue>
 using namespace std;
-
-int main()//题目说闭合曲线，表示两点之间只有一个通路（上下左右）
+//题目说闭合曲线，表示两点之间只有一个通路（上下左右）
+//在外圈增加一层0，这样每个点都有四条路
+int main()
 {
-	int a[10][10];
-	for(int i=0;i<10;i++)
-		for(int j=0;j<10;j++)
+	int a[12][12];
+	for(int i=1;i<11;i++)
+		for(int j=1;j<11;j++)
 			cin>>a[i][j];
+	for(i=0;i<12;i++)
+	{
+		a[0][i]=0;
+		a[11][i]=0;
+		a[i][0]=0;
+		a[i][11]=0;
+	}
 	int area=0;
+	//标记入栈下标
 	int itag=0;
 	int jtag=0;
 	queue<int> q1,q2;
-	for(i=1;i<9;i++)
-		for(int j=1;j<9;j++)
+	for(i=1;i<11;i++)
+	{
+		if(!q1.empty()&&!q2.empty())
+			break;
+		for(int j=1;j<11;j++)
 			if(a[i][j]!=0)
 			{
+				//将该点下面一点入栈，从头开始遍历不为0的点只有下面的点可能符合要求
 				q1.push(i+1);
 		    	q2.push(j);
 				itag=i+1;
 				jtag=j;
+				break;
 			}
+	}
 	while(!q1.empty()&&!q2.empty())
 	{
 		i=q1.front();
