@@ -1,0 +1,52 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+int pre[1001];
+
+int find(int x)//查集 找掌门
+{
+	int r = x;
+	while (pre[r] != r)
+		r = pre[r];
+	return r;
+}
+
+void join(int r1, int r2)//并集  交朋友
+{
+	int a = find(r1);
+	int b = find(r2);
+	if (a != b)
+		pre[a] = b;
+}
+
+int main()
+{
+	int n, m;
+	scanf_s("%d %d", &n, &m);
+	for (int i = 1; i <= n; i++)
+		pre[i] = i;//将所有人的前节点定义为自己
+	for (int i = 1; i <= m; i++)
+	{
+		int x, y;
+		scanf_s("%d %d", &x, &y);
+		pre[x] = find(x);//路径压缩
+		pre[y] = find(y);
+		if (pre[x] != pre[y])//取并集 成为一个家庭
+			join(pre[x], pre[y]);
+	}
+	int s = 0, max1 = 0;
+	for (int i = 1; i <= n; i++)
+	{
+		int s2 = 0;
+		if (find(i) == i)//如果一个人的祖先是他自己，代表一个家庭
+			s++;
+		for (int j = 1; j <= n; j++)
+		{
+			if (find(i) == find(j))//如果祖先相同，代表是这个家的人
+				s2++;//记家人数
+		}
+		max1 = max(max1, s2);//取最大值
+	}
+	cout << s << " " << max1;//家庭个数 最大家庭人数
+}
