@@ -1,0 +1,79 @@
+#include<stdio.h>
+#include<memory.h>
+#include<math.h>
+
+int FNumsTimes[203][2] ;
+int TimesFNums[203][203] ;
+
+int main(void)
+{
+	int N = 0 ;
+	int A = 0 ;
+	int B = 0 ;
+	int nCounts = 0 ;
+	int nThisTimes = 0 ;
+	int i = 0 ;
+	int j = 0 ;
+	int k = 0 ; 
+	int n = 0 ;
+	int fCanFind = 0 ;
+	int fUnfinish = 1 ;	
+
+	while(scanf("%d%d%d",&N,&A,&B) != EOF)
+	{				
+		memset(FNumsTimes,0,sizeof(FNumsTimes)) ;
+		memset(TimesFNums,0,sizeof(TimesFNums)) ;
+
+		for(i = 1 ; i <= N ; i++)
+		{
+			scanf("%d",&FNumsTimes[i][0]) ;
+		}
+
+		nCounts = 1 ;
+		TimesFNums[0][0] = B ;
+		fCanFind = 1 ;
+		fUnfinish = 1 ;
+
+		for(nThisTimes = 0 ; nThisTimes <= N ; nThisTimes++)
+		{
+			n = nCounts ;
+			nCounts = 0 ;
+			if(1 == fCanFind)
+			{
+				fCanFind = 0 ;
+
+				for(i = 1 ; i <= N ; i++)
+				{
+					for(j = 0 ; j < n ; j++)
+					{
+						if(abs(i - TimesFNums[nThisTimes][j]) == FNumsTimes[i][0]) 
+						{
+							TimesFNums[nThisTimes+1][nCounts] = i ;
+							FNumsTimes[i][1] = nThisTimes + 1 ;
+							nCounts++ ;
+							if(i == A)
+							{
+								fUnfinish = 0 ;
+							}
+							fCanFind = fUnfinish ;
+						}
+					}
+				}
+			}
+		}
+
+		if(A == B)
+		{
+			printf("%d\n",0) ;
+		}
+		else if(0 == FNumsTimes[A][1])
+		{
+			printf("%d\n",-1) ;
+		}
+		else
+		{
+			printf("%d\n",FNumsTimes[A][1]) ;
+		}
+	}
+	return 0 ;
+}
