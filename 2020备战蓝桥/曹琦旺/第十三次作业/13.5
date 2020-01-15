@@ -1,0 +1,27 @@
+#include <iostream>
+#include<algorithm>
+#include <queue>
+using namespace std;
+
+int n, a, b;
+int Ki[201], cnt[201];//cnt标记访问过的层数  Ki标记每层电梯可以上行或者下行的step数
+int main()
+{
+	int i;
+	queue<int>p;
+	scanf_s("%d%d%d", &n, &a, &b);//N A B
+	for (i = 1; i <= n; i++)
+		scanf_s("%d", &Ki[i]);//从键盘录入每层楼step数
+	cnt[a] = 1;
+	p.push(a);//所在楼层入队
+	while (!p.empty())//广度优先遍历
+	{
+		int now = p.front(), l = now - Ki[now], r = now + Ki[now];//左出 右出
+		p.pop();//队列前端出队
+		if (l >= 1 && !cnt[l]) p.push(l), cnt[l] = cnt[now] + 1;//如果有左子树 则左子树入队
+		if (r <= n && !cnt[r]) p.push(r), cnt[r] = cnt[now] + 1;//如果有右子树 则右子树入队
+		if (l == b || r == b)  break;
+	}
+	printf_s("%d\n", cnt[b] - 1);
+	return 0;
+}
