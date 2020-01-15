@@ -1,4 +1,6 @@
+//注：本程序只能处理一组数据，时间关系没找到goto后失败原因，且n不能过大，原因是n被设为整形数组，可以考虑用字符串读取后转为整形二维数组，也或许有更简单的方法
 #include<iostream>
+#include<sstream>
 using namespace std;
 
 struct Node
@@ -141,78 +143,71 @@ int main()
 {
 	List L;
 	Init(&L);
-	int n[10+1];
-	int m[10+1];
-	int k[10+1];
-	int x[10+1];
-	int y[10+1];
-	cout<<"输入数据后以#结束"<<endl;
-	int bb=0;
-	int i=1;
-	while(cin>>n[i]&&n[i]!='#')
+	int n[11];//1-10,避免错误
+	int m[11];
+	int k[11];
+	int x[11];
+	int y[11];
+	cout<<"输入几组数据?"<<endl;
+	int count;
+	cin>>count;
+	for(int i=1;i<=count;i++)
 	{
-		cin>>m[i];
+		cin>>n[i]>>m[i];
 		for(int j=1;j<=m[i];j++)
 		{
-			bb++;
 			cin>>k[j];
 			if(k[j]!=4)
 				cin>>x[j]>>y[j];
 		}
-		i++;
 	}
-	int t=1;
-loop:	for(i=1;i<=n[t];i++)
-		insertend(&L,i);
-	i=1;
-	while(k[i]!=NULL)
+	int t=1;//第t组数据
+loop:	for(int a=1;a<=n[t];a++)
+		insertend(&L,a);
+	for(int j=1;j<=m[t];j++)
 	{
-	switch(k[i])
-	{
-	case 1:
-		remove(&L,x[i]);
-		insertbefore(&L,y[i],x[i]);
-		break;
-	case 2:
-		remove(&L,x[i]);
-		insertback(&L,y[i],x[i]);
-		break;
-	case 3:
+		switch(k[j])
 		{
-		Node *px=remove(&L,x[i]);
-		Node *py=remove(&L,y[i]);
-		Insert(&L,px,y[i]);
-		Insert(&L,py,x[i]);
-		break;
+		case 1:
+			remove(&L,x[j]);
+			insertbefore(&L,y[j],x[j]);
+			break;
+		case 2:
+			remove(&L,x[j]);
+			insertback(&L,y[j],x[j]);
+			break;
+		case 3:
+			{
+				Node *px=remove(&L,x[j]);
+				Node *py=remove(&L,y[j]);
+				Insert(&L,px,y[j]);
+				Insert(&L,py,x[j]);
+				break;
+			}
+		case 4:
+			reorg(&L);
+			break;
 		}
-	case 4:
-		reorg(&L);
-		break;
-	}
-	i++;
 	}
 	int s=0;
 	Node *p=Begin(&L);
-		cout<<"Case"<<t<<':';
-		for(int q=1;q<=n[t];q++,p=p->next)
-		{
-			for(int k=0;k<=n[t]/2;k++)
-				if(q==k*2+1)
-				{
-					s+=p->data;
-					break;
-				}
-		}
-		cout<<s<<endl;
-	if(t<bb)
+	cout<<"Case"<<t<<':';
+	for(a=1;a<=n[t];a++,p=p->next)
 	{
-		Node *w=Begin(&L);
-		for(int q=0;q<L.size;q++)
-		{
+		for(int k=0;k<=n[t]/2;k++)
+			if((L.tag==0&&a==k*2+1)||(L.tag==1&&a==k*2))
+			{
+				s+=p->data;
+				break;
+			}
+	}
+	cout<<s<<endl;
+	if(t<count)
+	{
+		t++;		
+		for(Node *w=Begin(&L);w!=End(&L);w=w->next)
 			Erase(&L,w);
-			w=w->next;
-		}
-		t++;
+		if(L.tag==1)L.tag=0;
 		goto loop;
 	}
 	return 0;
