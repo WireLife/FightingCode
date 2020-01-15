@@ -93,6 +93,12 @@ void modify(node* n, int a)
 {
 	n->num = a;
 }
+void raorg(list* p)
+{
+	node* t = p->begin;
+	p->begin = p->end;
+	p->end = t;
+}
 int main()
 {
 	int a[] = { 1,3,2,4,5 };
