@@ -146,13 +146,15 @@ int main()
 	int k[10+1];
 	int x[10+1];
 	int y[10+1];
-	int bb=1;
+	cout<<"输入数据后以#结束"<<endl;
+	int bb=0;
 	int i=1;
-	while(cin>>n[i])
+	while(cin>>n[i]&&n[i]!='#')
 	{
 		cin>>m[i];
-		for(int j=1;j<=m[i];j++,bb++)
+		for(int j=1;j<=m[i];j++)
 		{
+			bb++;
 			cin>>k[j];
 			if(k[j]!=4)
 				cin>>x[j]>>y[j];
@@ -191,20 +193,17 @@ loop:	for(i=1;i<=n[t];i++)
 	}
 	int s=0;
 	Node *p=Begin(&L);
-	for(i=1;i<=bb;i++)
-	{
-		cout<<"Case"<<i<<':';
-		for(int q=1;q<=n[i];q++,p=p->next)
+		cout<<"Case"<<t<<':';
+		for(int q=1;q<=n[t];q++,p=p->next)
 		{
-			for(int k=0;k<=n[i]/2;k++)
-				if(i==k*2+1)
+			for(int k=0;k<=n[t]/2;k++)
+				if(q==k*2+1)
 				{
 					s+=p->data;
 					break;
 				}
 		}
 		cout<<s<<endl;
-	}
 	if(t<bb)
 	{
 		Node *w=Begin(&L);
