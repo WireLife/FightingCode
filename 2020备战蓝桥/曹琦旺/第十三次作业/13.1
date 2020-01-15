@@ -1,0 +1,129 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+//top0 end0 push empty front pop size   q1.top0=1000 qi.end0=1000
+struct quque
+{
+	int data[2000];
+	quque *next;
+	quque *first;//头节点
+}q;
+
+class List
+{
+public:
+	quque *List::creat(int a[],int n);//创建双端队列
+	void push(int x);
+	void empty();
+	void front();
+	void pop();
+	void size();
+	
+};
+
+quque *List::creat(int q1[],int n)//创建队列
+{
+	quque *r;
+	r = new quque;
+	q.first = new quque;
+	r = q.first;
+	for (int i = 1; i <n-1; i++)
+	{
+		quque *s = new quque;
+		s->data = q1[i];
+		r->next = s;
+		r = s;
+	}
+	q1[0] = 1000;
+	q1[n] = 1000;
+	r->next = NULL;
+	return q.first;
+}
+
+void List::push(int x)//前端插入
+{
+	int x;
+	quque *p, *s;
+	p = new quque;
+	s = new quque;
+	cout << "请输入插入元素的值：" << endl;
+	cin >> x;
+	s->data= x;//左值必须是变量而不是常量
+	p = q.first;
+	p = s;
+	p->next = q.first->next;
+}
+
+void List::front()
+{
+	quque *p;
+	p = new quque;
+	p = q.first;
+	if (p != NULL)
+		cout << "队首元素是：" << p->next << endl;
+}
+
+void List::pop()//队首元素删除
+{
+	quque *p, *s;
+	p = new quque;
+	s = new quque;
+	p =q.first;
+	if (p != NULL)
+	{
+		s = p->next;
+		cout << "要删除的值：" << s->data << endl;
+		p->next = (p->next)->next;
+		delete s;
+	}
+}
+
+void List::size()
+{
+	int count = 0;
+	for (int i = 0; i < 2000; i++)
+	{
+		if (q.data[i] != '\n')
+			count++;
+	}
+	cout << "双端队列大小为：" << count << endl;
+}
+
+void List::empty()
+{
+	if (sizeof(q.data) == 0)
+		cout << "该双端队列为空！" << endl;
+}
+
+int main() //q1.top0=1000 q1.end0=1000
+{
+	creat(int q1[], int 5);
+	int order;    int x;
+	while (1) 
+	{
+		cout << " 请选择命令:1-入队操作，2-出队操作,3-查询队列长度,4-结束 :";
+		cin >> order;
+		switch (order) 
+		{
+		case 1: cout << " 请输入需要入队的数值:" << endl;
+			cin >> x;    
+			q1.push(x);
+			break;
+		 case 2:
+			if (q1.empty())
+			{
+				cout << " 队列为空" << endl;
+				break;
+			}
+			cout << "出队的数据为:" << q1.front() << endl;
+			q1.pop();     
+			break;
+		 case 3:
+			cout << q1.size() << endl;
+		    break;  
+		    default: goto q;
+		}
+	}
+ q:	       return 0;
+}
