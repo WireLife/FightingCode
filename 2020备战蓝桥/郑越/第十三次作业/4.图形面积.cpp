@@ -1,10 +1,3 @@
-//
-//  main.cpp
-//  *面积
-//
-//  Created by Richard.ZHENG on 2020/1/15.
-//  Copyright © 2020 Richard.ZHENG. All rights reserved.
-//
 
 #include<iostream>
 
