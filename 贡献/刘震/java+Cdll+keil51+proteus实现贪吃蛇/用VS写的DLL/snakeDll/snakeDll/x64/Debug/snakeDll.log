@@ -1,0 +1,7 @@
+﻿  stdafx.cpp
+  dllmain.cpp
+  snakeDll.cpp
+e:\program\visualstudio\dll\snakedll\snakedll\snakedll.cpp(60): warning C4838: 从“int”转换到“char”需要收缩转换
+  正在生成代码...
+    正在创建库 E:\Program\VisualStudio\DLL\snakeDll\x64\Debug\snakeDll.lib 和对象 E:\Program\VisualStudio\DLL\snakeDll\x64\Debug\snakeDll.exp
+  snakeDll.vcxproj -> E:\Program\VisualStudio\DLL\snakeDll\x64\Debug\snakeDll.dll
